@@ -1,5 +1,6 @@
+import Page from './Page';
 function App() {
-	return <div className="App">hello world</div>;
+	return <Page />;
 }
 
 export default App;

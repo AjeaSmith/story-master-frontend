@@ -2,10 +2,17 @@ import React from 'react';
 import Footer from './pages/footer/Footer';
 import Header from './pages/header/Header';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import styled from 'styled-components';
 
+const StyledPage = styled.section`
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+`;
 const Page = () => {
 	return (
-		<section>
+		<StyledPage>
 			<Router>
 				<Header />
 				<Switch>
@@ -15,7 +22,7 @@ const Page = () => {
 				</Switch>
 				<Footer />
 			</Router>
-		</section>
+		</StyledPage>
 	);
 };
 

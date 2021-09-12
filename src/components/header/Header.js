@@ -7,6 +7,7 @@ import {
 	StyledContainer,
 	StyledMenuLi,
 } from './HeaderStyle';
+import { Link } from 'react-router-dom';
 const Header = () => {
 	return (
 		<header>
@@ -14,7 +15,9 @@ const Header = () => {
 				<StyledLogo src={logo} alt="graphic of lady reading book" />
 				<StyledMenu>
 					<StyledMenuList>
-						<StyledMenuLi>Profile</StyledMenuLi>
+						<StyledMenuLi>
+							<Link to="/profile">Profile</Link>
+						</StyledMenuLi>
 						<StyledMenuLi>Login</StyledMenuLi>
 						<StyledMenuLi>Register</StyledMenuLi>
 						<StyledMenuLi>Tell Story</StyledMenuLi>

@@ -7,7 +7,7 @@ export const StyledContainer = styled.div`
 	align-items: center;
 	grid-template-areas: 'logo menu';
 	grid-template-columns: 300px 1fr;
-	padding: 1em 2em;
+	padding: 10px 2em;
 
 	@media screen and (max-width: 766px) {
 		grid-template-areas: 'menu';

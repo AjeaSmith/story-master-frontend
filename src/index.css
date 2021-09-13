@@ -13,3 +13,6 @@ a {
 a:visited {
 	color: black;
 }
+hr {
+	border-top: 1px solid #E4E4E7;
+}

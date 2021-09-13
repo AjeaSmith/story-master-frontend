@@ -5,9 +5,11 @@ import {
 	StyledHeading,
 	StyledSubheading,
 	StyledSection,
-	StyledImg,
 	StyledContent,
 	StyledContainer,
+	StyledStory,
+	StyledUser,
+	StyledDetails,
 } from './HomeStyle';
 const HomePage = () => {
 	return (
@@ -23,9 +25,26 @@ const HomePage = () => {
 			<StyledSection>
 				<StyledContainer>
 					<StyledContent>
-						Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ex
-						quae earum tenetur aperiam dolorem ipsam quidem excepturi
-						quaerat?
+						<StyledStory>
+							<StyledUser>
+								<img
+									src="https://via.placeholder.com/50"
+									alt="placeholder"
+								/>
+								<small>James</small>
+								<div>
+									<small>5mins</small>
+								</div>
+							</StyledUser>
+							<StyledDetails>
+								<h2>My great story</h2>
+								<p>
+									Lorem ipsum dolor sit amet consectetur adipisicing
+									elit. Laudantium, facilis.
+								</p>
+							</StyledDetails>
+							<hr />
+						</StyledStory>
 					</StyledContent>
 				</StyledContainer>
 			</StyledSection>

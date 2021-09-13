@@ -20,7 +20,19 @@ export const StyledContainer = styled.div`
 	padding: 10px 2em;
 `;
 export const StyledContent = styled.div`
-    margin-top: 20px;
+	margin-top: 20px;
 	height: 300px;
 	width: 100%;
+	border: 1px solid #e4e4e7;
+	background-color: #fff;
+	border-radius: 5px;
+`;
+export const StyledStory = styled.div`
+	padding: 0 12px;
+`;
+export const StyledUser = styled.div`
+	padding: 0 12px;
+`;
+export const StyledDetails = styled.div`
+	padding: 0 12px;
 `;

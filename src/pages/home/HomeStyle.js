@@ -7,6 +7,7 @@ export const StyledHeading = styled.h1`
 export const StyledHeading2 = styled.h2`
 	margin-top: 0;
 	margin-bottom: 10px;
+	font-size: 20px;
 `;
 export const StyledSubheading = styled.p`
 	font-size: 16px;

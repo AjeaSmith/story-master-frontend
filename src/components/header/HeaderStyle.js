@@ -31,6 +31,7 @@ export const StyledMenuList = styled.ul`
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
+	margin-bottom: 0;
 
 	@media screen and (max-width: 766px) {
 		justify-content: flex-start;

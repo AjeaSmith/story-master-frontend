@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import Home from './pages/home/HomePage';
 import Profile from './pages/profile/ProfilePage';
+import Register from './pages/register/RegisterPage';
 
 function App() {
 	const StyledPage = styled.section`
@@ -13,8 +14,8 @@ function App() {
 				<Switch>
 					<Route exact path="/" component={Home} />
 					<Route path="/profile" component={Profile} />
+					<Route path="/register" component={Register} />
 					<Route path="/login"></Route>
-					<Route path="/register"></Route>
 				</Switch>
 			</Router>
 		</StyledPage>

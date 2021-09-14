@@ -12,14 +12,18 @@ const Header = () => {
 	return (
 		<header>
 			<StyledContainer>
-				<StyledLogo src={logo} alt="graphic of lady reading book" />
+				<Link to="/">
+					<StyledLogo src={logo} alt="graphic of lady reading book" />
+				</Link>
 				<StyledMenu>
 					<StyledMenuList>
 						<StyledMenuLi>
 							<Link to="/profile">Profile</Link>
 						</StyledMenuLi>
 						<StyledMenuLi>Login</StyledMenuLi>
-						<StyledMenuLi>Register</StyledMenuLi>
+						<StyledMenuLi>
+							<Link to="/register">Register</Link>
+						</StyledMenuLi>
 						<StyledMenuLi>Tell Story</StyledMenuLi>
 						<StyledMenuLi>Logout</StyledMenuLi>
 					</StyledMenuList>

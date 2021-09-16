@@ -2,7 +2,7 @@
 import Header from '../../components/header/Header';
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Form, Button, Alert } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 import { StyledContainer } from './RegisterStyle';
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';

@@ -1,10 +1,22 @@
-import { useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
+// import { useState } from 'react';
 import Header from '../../components/header/Header';
+import { useDispatch } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { Form, Button, Alert } from 'react-bootstrap';
 import { StyledContainer } from './RegisterStyle';
 import { useForm } from 'react-hook-form';
+import { useSelector } from 'react-redux';
 
-const RegisterPage = () => {
+import * as UserActionCreators from '../../redux/user/actions/userActions';
+
+const RegisterPage = ({ history }) => {
+	// state
+	const State = useSelector((state) => state.userState);
+
+	// actions
+	const dispatch = useDispatch();
+	const { Register } = bindActionCreators(UserActionCreators, dispatch);
+
 	const {
 		register,
 		handleSubmit,
@@ -12,7 +24,10 @@ const RegisterPage = () => {
 	} = useForm({ mode: 'onBlur' });
 
 	const submit = (data) => {
-		console.log(data);
+		Register(data);
+		setTimeout(() => {
+			history.push('/');
+		}, 4000);
 	};
 	return (
 		<>
@@ -77,8 +92,12 @@ const RegisterPage = () => {
 						</Form.Text>
 					</Form.Group>
 
-					<Button type="submit" style={{ background: '#6d28d9' }}>
-						Submit
+					<Button
+						type="submit"
+						style={{ background: '#6d28d9' }}
+						disabled={State.loading}
+					>
+						{State.loading ? 'Loading…' : 'Submit'}
 					</Button>
 				</Form>
 			</StyledContainer>

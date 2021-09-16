@@ -1,16 +1,22 @@
 const initalState = {
-	user: null,
-	message: null,
-	error: null,
+	error: '',
+	loading: false,
 };
 const userReducer = (state = initalState, action) => {
 	switch (action.type) {
-		case 'REGISTER':
-			return { ...state, user: action.payload };
+		case 'REGISTER_PENDING':
+			return { ...state, loading: true };
 		case 'REGISTER_SUCCESS':
-			return { ...state, message: action.payload };
+			return {
+				...state,
+				loading: false,
+			};
 		case 'REGISTER_ERROR':
-			return { ...state, error: action.payload };
+			return {
+				...state,
+				error: action.payload,
+				loading: false,
+			};
 		case 'LOGIN':
 			return { ...state, user: action.payload };
 		default:

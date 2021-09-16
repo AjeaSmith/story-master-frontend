@@ -1,5 +1,6 @@
-export const Register = async (dispatch, { username, email, password }) => {
-	const { token, user, message, error, expires, success } = await fetch(
+export const Register = ({ username, email, password }) => async (dispatch) => {
+	dispatch({ type: 'REGISTER_PENDING' });
+	const response = await fetch(
 		'https://story-master-backend.herokuapp.com/api/user/register',
 		{
 			method: 'POST',
@@ -7,13 +8,15 @@ export const Register = async (dispatch, { username, email, password }) => {
 			body: JSON.stringify({ username, email, password }),
 		}
 	);
-	dispatch({ type: 'REGISTER', payload: user });
+	const { token, error, success } = await response.json();
 
 	if (error) {
 		dispatch({ type: 'REGISTER_ERROR', payload: error });
 	}
 	if (success) {
-		dispatch({ type: 'REGISTER_SUCCESS', payload: message });
 		localStorage.setItem('token', token);
+		dispatch({
+			type: 'REGISTER_SUCCESS',
+		});
 	}
 };

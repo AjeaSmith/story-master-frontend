@@ -8,7 +8,12 @@ import {
 	StyledMenuLi,
 } from './HeaderStyle';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 const Header = () => {
+	const userState = useSelector((state) => state.userState);
+	const logout = () => {
+		localStorage.removeItem('token');
+	};
 	return (
 		<header>
 			<StyledContainer>
@@ -17,15 +22,27 @@ const Header = () => {
 				</Link>
 				<StyledMenu>
 					<StyledMenuList>
-						<StyledMenuLi>
-							<Link to="/profile">Profile</Link>
-						</StyledMenuLi>
-						<StyledMenuLi>Login</StyledMenuLi>
-						<StyledMenuLi>
-							<Link to="/register">Register</Link>
-						</StyledMenuLi>
-						<StyledMenuLi>Tell Story</StyledMenuLi>
-						<StyledMenuLi>Logout</StyledMenuLi>
+						{!userState.isAuthenticated ? (
+							<>
+								<StyledMenuLi>Login</StyledMenuLi>
+								<StyledMenuLi>
+									<Link to="/register" style={{ color: 'white' }}>
+										Register
+									</Link>
+								</StyledMenuLi>
+							</>
+						) : (
+							<>
+								<StyledMenuLi>
+									<Link to="/profile">Profile</Link>
+								</StyledMenuLi>
+
+								<StyledMenuLi style={{ color: 'white' }}>
+									Tell Story
+								</StyledMenuLi>
+								<StyledMenuLi>Logout</StyledMenuLi>
+							</>
+						)}
 					</StyledMenuList>
 				</StyledMenu>
 			</StyledContainer>

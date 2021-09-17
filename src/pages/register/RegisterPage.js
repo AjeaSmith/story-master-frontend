@@ -1,21 +1,20 @@
 // import { useState } from 'react';
 import Header from '../../components/header/Header';
 import { useDispatch } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Alert } from 'react-bootstrap';
 import { StyledContainer } from './RegisterStyle';
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 
 import * as UserActionCreators from '../../redux/user/actions/userActions';
+import { useEffect } from 'react';
 
 const RegisterPage = ({ history }) => {
 	// state
-	const State = useSelector((state) => state.userState);
+	const userState = useSelector((state) => state.userState);
 
 	// actions
 	const dispatch = useDispatch();
-	const { Register } = bindActionCreators(UserActionCreators, dispatch);
 
 	const {
 		register,
@@ -23,12 +22,18 @@ const RegisterPage = ({ history }) => {
 		formState: { errors },
 	} = useForm({ mode: 'onBlur' });
 
+	useEffect(() => {
+		if (userState.isAuthenticated) {
+			setTimeout(() => {
+				history.push('/');
+			}, 4000);
+		}
+	}, [history, userState.isAuthenticated]);
+
 	const submit = (data) => {
-		Register(data);
-		setTimeout(() => {
-			history.push('/');
-		}, 4000);
+		dispatch(UserActionCreators.Register(data));
 	};
+	console.log(userState);
 	return (
 		<>
 			<Header />
@@ -42,6 +47,12 @@ const RegisterPage = ({ history }) => {
 					Register
 				</h2>
 				<Form onSubmit={handleSubmit(submit)}>
+					{userState.error !== '' ? (
+						<Alert variant="danger">{userState.error}</Alert>
+					) : null}
+					{userState.message !== '' ? (
+						<Alert variant="success">{userState.message}</Alert>
+					) : null}
 					<Form.Group className="mb-3" controlId="formBasicUsername">
 						<Form.Label>Username</Form.Label>
 						<Form.Control
@@ -95,9 +106,9 @@ const RegisterPage = ({ history }) => {
 					<Button
 						type="submit"
 						style={{ background: '#6d28d9' }}
-						disabled={State.loading}
+						disabled={userState.loading}
 					>
-						{State.loading ? 'Loading…' : 'Submit'}
+						{userState.loading ? 'Loading…' : 'Submit'}
 					</Button>
 				</Form>
 			</StyledContainer>

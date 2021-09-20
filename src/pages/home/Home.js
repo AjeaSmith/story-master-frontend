@@ -17,7 +17,7 @@ import {
 	StyledHeading2,
 	StyledPara,
 } from './HomeStyle';
-const HomePage = () => {
+const Home = () => {
 	return (
 		<>
 			<Header />
@@ -97,4 +97,4 @@ const HomePage = () => {
 	);
 };
 
-export default HomePage;
+export default Home;

@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 import * as UserActionCreators from '../../redux/user/actions/userActions';
 import { useEffect } from 'react';
 
-const RegisterPage = ({ history }) => {
+const Register = ({ history }) => {
 	// state
 	const userState = useSelector((state) => state.userState);
 
@@ -33,7 +33,6 @@ const RegisterPage = ({ history }) => {
 	const submit = (data) => {
 		dispatch(UserActionCreators.Register(data));
 	};
-	console.log(userState);
 	return (
 		<>
 			<Header />
@@ -116,4 +115,4 @@ const RegisterPage = ({ history }) => {
 	);
 };
 
-export default RegisterPage;
+export default Register;

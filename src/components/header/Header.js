@@ -8,15 +8,25 @@ import {
 	StyledMenuLi,
 } from './HeaderStyle';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import * as UserActionCreators from '../../redux/user/actions/userActions';
+import { Toast } from 'react-bootstrap';
 const Header = () => {
 	const userState = useSelector((state) => state.userState);
+	const dispatch = useDispatch();
+
 	const logout = () => {
-		localStorage.removeItem('token');
+		dispatch(UserActionCreators.Logout());
 	};
+
 	return (
 		<header>
 			<StyledContainer>
+				{userState.message !== '' ? (
+					<Toast>
+						<Toast.Body>{userState.message}</Toast.Body>
+					</Toast>
+				) : null}
 				<Link to="/">
 					<StyledLogo src={logo} alt="graphic of lady reading book" />
 				</Link>
@@ -24,7 +34,9 @@ const Header = () => {
 					<StyledMenuList>
 						{!userState.isAuthenticated ? (
 							<>
-								<StyledMenuLi>Login</StyledMenuLi>
+								<StyledMenuLi>
+									<Link to="/login">Login</Link>
+								</StyledMenuLi>
 								<StyledMenuLi>
 									<Link to="/register" style={{ color: 'white' }}>
 										Register
@@ -40,7 +52,7 @@ const Header = () => {
 								<StyledMenuLi style={{ color: 'white' }}>
 									Tell Story
 								</StyledMenuLi>
-								<StyledMenuLi>Logout</StyledMenuLi>
+								<StyledMenuLi onClick={logout}>Logout</StyledMenuLi>
 							</>
 						)}
 					</StyledMenuList>

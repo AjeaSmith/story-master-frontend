@@ -1,8 +1,9 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import styled from 'styled-components';
-import Home from './pages/home/HomePage';
-import Profile from './pages/profile/ProfilePage';
-import Register from './pages/register/RegisterPage';
+import Home from './pages/home/Home';
+import Login from './pages/login/Login';
+import Profile from './pages/profile/Profile';
+import Register from './pages/register/Register';
 
 function App() {
 	const StyledPage = styled.section`
@@ -15,7 +16,7 @@ function App() {
 					<Route exact path="/" component={Home} />
 					<Route path="/profile" component={Profile} />
 					<Route path="/register" component={Register} />
-					<Route path="/login"></Route>
+					<Route path="/login" component={Login}/>
 				</Switch>
 			</Router>
 		</StyledPage>

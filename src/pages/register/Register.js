@@ -25,7 +25,7 @@ const Register = ({ history }) => {
 	useEffect(() => {
 		if (userState.isAuthenticated) {
 			setTimeout(() => {
-				history.push('/');
+				history.push('/login');
 			}, 4000);
 		}
 	}, [history, userState.isAuthenticated]);

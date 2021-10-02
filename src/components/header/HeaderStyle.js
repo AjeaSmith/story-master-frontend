@@ -48,4 +48,5 @@ export const StyledMenuLi = styled.li`
 		border-radius: 4px;
 		padding: 0.7em;
 	}
+	cursor: pointer;
 `;

@@ -8,52 +8,52 @@ import {
 	StyledMenuLi,
 } from './HeaderStyle';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import * as UserActionCreators from '../../redux/user/actions/userActions';
-import { Toast } from 'react-bootstrap';
+import { useAuth0 } from '@auth0/auth0-react';
+
 const Header = () => {
-	const userState = useSelector((state) => state.userState);
-	const dispatch = useDispatch();
-
-	const logout = () => {
-		dispatch(UserActionCreators.Logout());
-	};
-
+	const { isAuthenticated, logout, loginWithRedirect } = useAuth0();
 	return (
 		<header>
 			<StyledContainer>
-				{userState.message !== '' ? (
-					<Toast>
-						<Toast.Body>{userState.message}</Toast.Body>
-					</Toast>
-				) : null}
 				<Link to="/">
 					<StyledLogo src={logo} alt="graphic of lady reading book" />
 				</Link>
 				<StyledMenu>
 					<StyledMenuList>
-						{!userState.isAuthenticated ? (
-							<>
-								<StyledMenuLi>
-									<Link to="/login">Login</Link>
-								</StyledMenuLi>
-								<StyledMenuLi>
-									<Link to="/register" style={{ color: 'white' }}>
-										Register
-									</Link>
-								</StyledMenuLi>
-							</>
-						) : (
+						{isAuthenticated ? (
 							<>
 								<StyledMenuLi>
 									<Link to="/profile">Profile</Link>
 								</StyledMenuLi>
 
-								<StyledMenuLi style={{ color: 'white' }}>
+								<StyledMenuLi
+									style={{
+										color: 'white',
+										fontSize: '0.9rem',
+										fontWeight: 'bold',
+										background: '#7625b6',
+										borderRadius: '4px',
+										padding: '0.7em',
+									}}
+								>
 									Tell Story
 								</StyledMenuLi>
 								<StyledMenuLi onClick={logout}>Logout</StyledMenuLi>
 							</>
+						) : (
+							<StyledMenuLi
+								onClick={loginWithRedirect}
+								style={{
+									color: 'white',
+									fontSize: '0.9rem',
+									fontWeight: 'bold',
+									background: '#7625b6',
+									borderRadius: '4px',
+									padding: '0.7em',
+								}}
+							>
+								Login
+							</StyledMenuLi>
 						)}
 					</StyledMenuList>
 				</StyledMenu>

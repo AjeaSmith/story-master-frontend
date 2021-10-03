@@ -39,14 +39,5 @@ export const StyledMenuList = styled.ul`
 `;
 export const StyledMenuLi = styled.li`
 	margin-left: 1.5em;
-
-	&:nth-child(2) {
-		font-size: 0.9rem;
-		color: white;
-		font-weight: bold;
-		background: #7625b6;
-		border-radius: 4px;
-		padding: 0.7em;
-	}
 	cursor: pointer;
 `;

@@ -17,15 +17,8 @@ import {
 	StyledHeading2,
 	StyledPara,
 } from './HomeStyle';
-import { useAuth0 } from '@auth0/auth0-react';
+
 const Home = () => {
-	const { user, isLoading, error } = useAuth0();
-	if (isLoading) {
-		return <div>Loading...</div>;
-	}
-	if (error) {
-		return <div>Oops... {error.message}</div>;
-	}
 	return (
 		<>
 			<Header />

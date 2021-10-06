@@ -38,23 +38,14 @@ const Login = ({ history }) => {
 					Login
 				</h2>
 				<Form onSubmit={handleSubmit(submit)}>
-					{userState.error !== '' ? (
-						<Alert variant="danger">{userState.error}</Alert>
-					) : null}
-					{userState.message !== '' ? (
-						<Alert variant="success">{userState.message}</Alert>
-					) : null}
-					<Form.Group className="mb-3" controlId="formBasicEmail">
-						<Form.Label>Email address</Form.Label>
+					<Form.Group className="mb-3" controlId="formBasicUsername">
+						<Form.Label>Username</Form.Label>
 						<Form.Control
-							type="email"
-							placeholder="Enter email"
-							{...register('email', {
+							type="text"
+							placeholder="Enter Username"
+							{...register('username', {
 								required: { value: true, message: 'Field is required' },
-								pattern: {
-									value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-									message: 'Email invalid',
-								},
+								minLength: { value: 5, message: 'Field is too short' },
 							})}
 						/>
 						<Form.Text style={{ color: 'red' }}>

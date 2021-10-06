@@ -34,9 +34,11 @@ const Header = () => {
 							Tell Story
 						</StyledMenuLi>
 						<StyledMenuLi>Logout</StyledMenuLi>
+						<StyledMenuLi>
+							<Link to={`/register`}>Register</Link>
+						</StyledMenuLi>
 						<StyledMenuLi
 							style={{
-								color: 'white',
 								fontSize: '0.9rem',
 								fontWeight: 'bold',
 								background: '#7625b6',
@@ -44,7 +46,9 @@ const Header = () => {
 								padding: '0.7em',
 							}}
 						>
-							Login
+							<Link to={`/login`} style={{ color: 'white' }}>
+								Login
+							</Link>
 						</StyledMenuLi>
 					</StyledMenuList>
 				</StyledMenu>

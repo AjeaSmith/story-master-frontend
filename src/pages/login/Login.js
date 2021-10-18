@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import Header from '../../components/header/Header';
 import { useDispatch } from 'react-redux';
 import { Form, Button, Alert } from 'react-bootstrap';
@@ -22,7 +22,7 @@ const Login = ({ history }) => {
 	} = useForm({ mode: 'onBlur' });
 
 	const submit = (data) => {
-		dispatch(UserActionCreators.login(data));
+		dispatch(UserActionCreators.login(data.username, data.password, history));
 	};
 
 	return (
@@ -37,6 +37,12 @@ const Login = ({ history }) => {
 				>
 					Login
 				</h2>
+				{userState.login_error && (
+					<Alert variant="danger">{userState.login_error}</Alert>
+				)}
+				{userState.login_message && (
+					<Alert variant="success">{userState.login_message}</Alert>
+				)}
 				<Form onSubmit={handleSubmit(submit)}>
 					<Form.Group className="mb-3" controlId="formBasicUsername">
 						<Form.Label>Username</Form.Label>
@@ -45,11 +51,10 @@ const Login = ({ history }) => {
 							placeholder="Enter Username"
 							{...register('username', {
 								required: { value: true, message: 'Field is required' },
-								minLength: { value: 5, message: 'Field is too short' },
 							})}
 						/>
 						<Form.Text style={{ color: 'red' }}>
-							{errors?.email?.message}
+							{errors?.username?.message}
 						</Form.Text>
 					</Form.Group>
 

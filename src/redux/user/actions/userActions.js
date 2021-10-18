@@ -1,39 +1,80 @@
 import axios from 'axios';
 
-export const register = (email, username, password) => async (dispatch) => {
-	await axios
+export const register = (email, username, password, history) => async (
+	dispatch
+) => {
+	dispatch({ type: 'REGISTER_PENDING' });
+
+	return axios
 		.post(
 			'http://localhost:8080/api/user/register',
 			{
-				email: email,
-				username: username,
-				password: password,
+				email,
+				username,
+				password,
 			},
-			{ headers: { 'Content-Type': 'application/json' } }
+			{
+				headers: { 'Content-Type': 'application/json' },
+				withCredentials: true,
+			}
 		)
-		.then((data) => {
-			console.log('success', data.data);
-			dispatch({ type: 'REGISTER_SUCCESS', payload: true });
+		.then(({ data }) => {
+			dispatch({
+				type: 'REGISTER_SUCCESS',
+				payload: { message: data.msg, error: '' },
+			});
+			setTimeout(() => {
+				history.push('/login');
+				dispatch({ type: 'RESET' });
+			}, 2000);
 		})
-		.catch(({ response }) => {
-			console.log('error', response.data.error);
-			dispatch({ type: 'REGISTER_FAIL', payload: response.data.error });
+		.catch((err) => {
+			dispatch({
+				type: 'REGISTER_FAIL',
+				payload: {
+					success: false,
+					message: '',
+					error: err.response.data.error,
+				},
+			});
 		});
 };
-export const login = async (username, password) => {
-	await axios
+
+export const login = (username, password, history) => (dispatch) => {
+	dispatch({
+		type: 'LOGIN_PENDING',
+	});
+	return axios
 		.post(
 			'http://localhost:8080/api/user/login',
 			{
 				username: username,
 				password: password,
 			},
-			{ headers: { 'Content-Type': 'application/json' } }
+			{
+				headers: { 'Content-Type': 'application/json' },
+				withCredentials: true,
+			}
 		)
-		.then((data) => {
-			console.log('success', data.data);
+		.then(({ data }) => {
+			dispatch({
+				type: 'LOGIN_SUCCESS',
+				payload: { msg: data.msg },
+			});
+			setTimeout(() => {
+				history.push('/');
+				dispatch({ type: 'RESET' });
+			}, 2000);
 		})
-		.catch(({ response }) => {
-			console.log('error', response.data.error);
+		.catch((err) => {
+			dispatch({
+				type: 'LOGIN_FAIL',
+				payload: {
+					error: 'incorrect username or password',
+				},
+			});
+			setTimeout(() => {
+				dispatch({ type: 'RESET' });
+			}, 2000);
 		});
 };

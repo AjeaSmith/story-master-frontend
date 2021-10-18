@@ -1,7 +1,6 @@
-// import { useState } from 'react';
 import Header from '../../components/header/Header';
 import { useDispatch } from 'react-redux';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Alert, Spinner } from 'react-bootstrap';
 import { StyledContainer } from './RegisterStyle';
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
@@ -9,6 +8,7 @@ import { useSelector } from 'react-redux';
 import * as UserActionCreators from '../../redux/user/actions/userActions';
 
 const Register = ({ history }) => {
+	console.log(history);
 	// state
 	const userState = useSelector((state) => state.userState);
 
@@ -22,9 +22,16 @@ const Register = ({ history }) => {
 	} = useForm({ mode: 'onBlur' });
 
 	const submit = (data) => {
-		dispatch(UserActionCreators.register(data));
-		history.push('/login');
+		dispatch(
+			UserActionCreators.register(
+				data.email,
+				data.username,
+				data.password,
+				history
+			)
+		);
 	};
+
 	return (
 		<>
 			<Header />
@@ -37,21 +44,13 @@ const Register = ({ history }) => {
 				>
 					Register
 				</h2>
+				{userState.register_error && (
+					<Alert variant="danger">{userState.register_error}</Alert>
+				)}
+				{userState.register_message && (
+					<Alert variant="success">{userState.register_message}</Alert>
+				)}
 				<Form onSubmit={handleSubmit(submit)}>
-					<Form.Group className="mb-3" controlId="formBasicUsername">
-						<Form.Label>Username</Form.Label>
-						<Form.Control
-							type="text"
-							placeholder="Enter username"
-							{...register('username', {
-								required: { value: true, message: 'Field is required' },
-							})}
-						/>
-						<Form.Text style={{ color: 'red' }}>
-							{errors?.username?.message}
-						</Form.Text>
-					</Form.Group>
-
 					<Form.Group className="mb-3" controlId="formBasicEmail">
 						<Form.Label>Email address</Form.Label>
 						<Form.Control
@@ -67,6 +66,19 @@ const Register = ({ history }) => {
 						/>
 						<Form.Text style={{ color: 'red' }}>
 							{errors?.email?.message}
+						</Form.Text>
+					</Form.Group>
+					<Form.Group className="mb-3" controlId="formBasicUsername">
+						<Form.Label>Username</Form.Label>
+						<Form.Control
+							type="text"
+							placeholder="Enter username"
+							{...register('username', {
+								required: { value: true, message: 'Field is required' },
+							})}
+						/>
+						<Form.Text style={{ color: 'red' }}>
+							{errors?.username?.message}
 						</Form.Text>
 					</Form.Group>
 
@@ -89,7 +101,16 @@ const Register = ({ history }) => {
 					</Form.Group>
 
 					<Button type="submit" style={{ background: '#6d28d9' }}>
-						Submit
+						{userState.loading ? (
+							<Spinner
+								animation="border"
+								variant="light"
+								role="status"
+								size="sm"
+							/>
+						) : (
+							<span>Submit</span>
+						)}
 					</Button>
 				</Form>
 			</StyledContainer>

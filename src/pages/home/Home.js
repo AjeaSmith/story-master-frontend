@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Banner from '../../components/banner/Banner';
 import Header from '../../components/header/Header';
 import {
@@ -17,11 +17,26 @@ import {
 	StyledHeading2,
 	StyledPara,
 } from './HomeStyle';
+import axios from 'axios';
 
-const Home = () => {
+const Home = ({ history }) => {
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
+	useEffect(() => {
+		return axios
+			.get('http://localhost:8080/api/user/authenticated', {
+				withCredentials: true,
+			})
+			.then(({ data }) => {
+				setIsLoggedIn(data.authenticated);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	}, []);
+	console.log('home', isLoggedIn);
 	return (
 		<>
-			<Header />
+			<Header history={history} isLoggedIn={isLoggedIn} />
 			<Banner>
 				<StyledHeading>Share your story around the world!</StyledHeading>
 				<StyledSubheading>

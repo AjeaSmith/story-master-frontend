@@ -32,11 +32,13 @@ export const register = (email, username, password, history) => async (
 			dispatch({
 				type: 'REGISTER_FAIL',
 				payload: {
-					success: false,
 					message: '',
 					error: err.response.data.error,
 				},
 			});
+			setTimeout(() => {
+				dispatch({ type: 'RESET' });
+			}, 3000);
 		});
 };
 

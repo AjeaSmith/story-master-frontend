@@ -1,10 +1,16 @@
 import Header from '../../components/header/Header';
-import TextField from '@mui/material/TextField';
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import { Form } from 'react-bootstrap';
-import { Typography, Paper, Grid, Alert, Button } from '@mui/material';
+import {
+	Typography,
+	Paper,
+	Grid,
+	Alert,
+	Button,
+	TextField,
+} from '@mui/material';
 
 import * as UserActionCreators from '../../redux/user/actions/userActions';
 

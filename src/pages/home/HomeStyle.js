@@ -15,7 +15,7 @@ export const StyledSubheading = styled.p`
 	line-height: 1.4;
 `;
 export const StyledSection = styled.section`
-	background-color: #f3f4f6;
+	background-color: #ffffff;
 	height: 90vh;
 `;
 export const StyledContainer = styled.div`

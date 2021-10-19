@@ -1,10 +1,10 @@
-// import { useEffect } from 'react';
 import Header from '../../components/header/Header';
+import TextField from '@mui/material/TextField';
 import { useDispatch } from 'react-redux';
-import { Form, Button, Alert } from 'react-bootstrap';
-import { StyledContainer } from './LoginStyle';
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
+import { Form } from 'react-bootstrap';
+import { Typography, Paper, Grid, Alert, Button } from '@mui/material';
 
 import * as UserActionCreators from '../../redux/user/actions/userActions';
 
@@ -24,67 +24,92 @@ const Login = ({ history }) => {
 	const submit = (data) => {
 		dispatch(UserActionCreators.login(data.username, data.password, history));
 	};
-
 	return (
 		<>
 			<Header />
-			<StyledContainer>
-				<h2
-					style={{
-						marginBottom: '20px',
-						textAlign: 'center',
-					}}
-				>
+			<form
+				noValidate
+				style={{
+					maxWidth: '400px',
+					margin: '5em auto',
+					padding: '0 2em',
+				}}
+				onSubmit={handleSubmit(submit)}
+				autoComplete="off"
+			>
+				<Typography variant="h4" sx={{ fontWeight: '500', margin: '0 0' }}>
 					Login
-				</h2>
+				</Typography>
 				{userState.login_error && (
-					<Alert variant="danger">{userState.login_error}</Alert>
+					<Alert severity="error">{userState.login_error}</Alert>
 				)}
 				{userState.login_message && (
-					<Alert variant="success">{userState.login_message}</Alert>
+					<Alert severity="success">{userState.login_message}</Alert>
 				)}
-				<Form onSubmit={handleSubmit(submit)}>
-					<Form.Group className="mb-3" controlId="formBasicUsername">
-						<Form.Label>Username</Form.Label>
-						<Form.Control
-							type="text"
-							placeholder="Enter Username"
-							{...register('username', {
-								required: { value: true, message: 'Field is required' },
-							})}
-						/>
-						<Form.Text style={{ color: 'red' }}>
-							{errors?.username?.message}
-						</Form.Text>
-					</Form.Group>
-
-					<Form.Group className="mb-3" controlId="formBasicPassword">
-						<Form.Label>Password</Form.Label>
-						<Form.Control
-							type="password"
-							placeholder="Password"
-							{...register('password', {
-								required: { value: true, message: 'Field is required' },
-								minLength: {
-									value: 6,
-									message: 'Minimum length is 6 characters',
-								},
-							})}
-						/>
-						<Form.Text style={{ color: 'red' }}>
-							{errors?.password?.message}
-						</Form.Text>
-					</Form.Group>
-
-					<Button
-						type="submit"
-						style={{ background: '#6d28d9' }}
-						disabled={userState.loading}
-					>
-						{userState.loading ? 'Loading…' : 'Submit'}
-					</Button>
-				</Form>
-			</StyledContainer>
+				<Paper
+					style={{ padding: 20 }}
+					elevation={3}
+					sx={{ margin: '2em auto' }}
+				>
+					<Grid container spacing={2}>
+						<Grid item xs={12}>
+							<TextField
+								required
+								error={!errors.username ? false : true}
+								label="User Name"
+								variant="standard"
+								sx={{ width: '100%' }}
+								{...register('username', {
+									required: {
+										value: true,
+										message: 'Field is required',
+									},
+								})}
+							/>
+							<Form.Text style={{ color: '#d32f2f' }}>
+								{errors?.username?.message}
+							</Form.Text>
+						</Grid>
+						<Grid item xs={12}>
+							<TextField
+								type="password"
+								required
+								error={!errors.password ? false : true}
+								label="Password"
+								variant="standard"
+								sx={{ width: '100%' }}
+								{...register('password', {
+									required: {
+										value: true,
+										message: 'Field is required',
+									},
+									minLength: {
+										value: 6,
+										message: 'Minimum length is 6 characters',
+									},
+								})}
+							/>
+							<Form.Text style={{ color: '#d32f2f' }}>
+								{errors?.password?.message}
+							</Form.Text>
+						</Grid>
+						<Grid item xs={12}>
+							<Button
+								variant="contained"
+								color="primary"
+								type="submit"
+								sx={{
+									width: '100%',
+									margin: '0.5em 0',
+									backgroundColor: '#18A999',
+								}}
+							>
+								{userState.loading ? 'Loading…' : 'Submit'}
+							</Button>
+						</Grid>
+					</Grid>
+				</Paper>
+			</form>
 		</>
 	);
 };

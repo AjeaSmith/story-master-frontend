@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Banner from '../../components/banner/Banner';
 import Header from '../../components/header/Header';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
 import {
-	StyledHeading,
-	StyledSubheading,
 	StyledSection,
 	StyledContent,
 	StyledContainer,
@@ -33,16 +33,44 @@ const Home = ({ history }) => {
 				console.log(err);
 			});
 	}, []);
-	console.log('home', isLoggedIn);
 	return (
 		<>
 			<Header history={history} isLoggedIn={isLoggedIn} />
 			<Banner>
-				<StyledHeading>Share your story around the world!</StyledHeading>
-				<StyledSubheading>
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur
-					debitis, itaque mollitia minima tempora odio.
-				</StyledSubheading>
+				<div
+					style={{
+						maxWidth: '600px',
+						margin: '0 auto',
+						padding: '3em 0',
+						display: 'flex',
+						justifyContent: 'center',
+						alignItems: 'center',
+						flexDirection: 'column',
+						color: '#00004d',
+					}}
+				>
+					<Typography
+						align="center"
+						variant="h3"
+						sx={{ fontWeight: '600' }}
+					>
+						Share your story around the world!
+					</Typography>
+					<Typography
+						variant="subtitle1"
+						sx={{ fontWeight: '500', margin: '12px 0' }}
+					>
+						Lorem ipsum dolor sit amet consectetur adipisicing elit.
+						Expedita saepe eos error harum quos praesentium odio
+						voluptatum quas reprehenderit. Explicabo!
+					</Typography>
+					<Button
+						variant="contained"
+						sx={{ backgroundColor: '#18A999', margin: '12px 0' }}
+					>
+						Ready to share your story?
+					</Button>
+				</div>
 			</Banner>
 			<StyledSection>
 				<StyledContainer>

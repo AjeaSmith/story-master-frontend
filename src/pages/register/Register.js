@@ -40,7 +40,6 @@ const Register = ({ history }) => {
 
 	return (
 		<>
-			<Header />
 			<form
 				noValidate
 				style={{
@@ -55,7 +54,9 @@ const Register = ({ history }) => {
 					Register
 				</Typography>
 				{userState.register_error && (
-					<Alert severity="error" sx={{marginTop: "1em"}}>{userState.register_error}</Alert>
+					<Alert severity="error" sx={{ marginTop: '1em' }}>
+						{userState.register_error}
+					</Alert>
 				)}
 				{userState.register_message && (
 					<Alert severity="success">{userState.register_message}</Alert>

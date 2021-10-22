@@ -21,7 +21,7 @@ export const logout = (history) => (dispatch) => {
 		.get('http://localhost:8080/api/user/logout')
 		.then(({ data }) => {
 			dispatch({ type: 'LOGOUT', payload: data.authenticated });
-			history.push('/login');
+			window.location = '/login';
 		})
 		.catch((err) => {
 			console.log(err);

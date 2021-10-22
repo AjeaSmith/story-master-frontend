@@ -32,7 +32,6 @@ const Login = ({ history }) => {
 	};
 	return (
 		<>
-			<Header />
 			<form
 				noValidate
 				style={{

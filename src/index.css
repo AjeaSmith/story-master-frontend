@@ -15,3 +15,6 @@ a:visited {
 hr {
 	border-top: 1px solid #828282;
 }
+.profile__detailheader {
+	font-weight: bold;
+}

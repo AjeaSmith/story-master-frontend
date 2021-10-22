@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 const Banner = ({ children }) => {
 	return (
 		<Box
+			component="section"
 			sx={{
 				width: '100%',
 				height: 380,

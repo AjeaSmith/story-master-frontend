@@ -25,7 +25,6 @@ const userReducer = (state = initalState, action) => {
 				register_error: action.payload.error,
 			};
 		}
-
 		case 'LOGIN_PENDING': {
 			return {
 				...state,

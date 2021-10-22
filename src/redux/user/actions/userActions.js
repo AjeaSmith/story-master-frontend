@@ -32,15 +32,17 @@ export const register = (email, username, password, history) => async (
 			dispatch({
 				type: 'REGISTER_FAIL',
 				payload: {
-					success: false,
 					message: '',
 					error: err.response.data.error,
 				},
 			});
+			setTimeout(() => {
+				dispatch({ type: 'RESET' });
+			}, 3000);
 		});
 };
 
-export const login = (username, password, history) => (dispatch) => {
+export const login = (username, password) => (dispatch) => {
 	dispatch({
 		type: 'LOGIN_PENDING',
 	});
@@ -62,7 +64,7 @@ export const login = (username, password, history) => (dispatch) => {
 				payload: { msg: data.msg },
 			});
 			setTimeout(() => {
-				history.push('/');
+				window.location = '/';
 				dispatch({ type: 'RESET' });
 			}, 2000);
 		})

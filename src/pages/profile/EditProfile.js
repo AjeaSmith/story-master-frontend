@@ -1,25 +1,19 @@
-import { useDispatch } from 'react-redux';
-import { useForm } from 'react-hook-form';
+import React from 'react';
+import ProfileBanner from '../../components/banner/ProfileBanner';
 import { useSelector } from 'react-redux';
 import { Form } from 'react-bootstrap';
+import { useForm } from 'react-hook-form';
 import {
-	Typography,
-	Paper,
 	Grid,
-	Alert,
-	Button,
 	TextField,
+	Button,
+	Paper,
+	Typography,
+	TextareaAutosize,
 } from '@mui/material';
 
-import * as UserActionCreators from '../../redux/user/actions/userActions';
-
-const Register = ({ history }) => {
-	// state
+const EditProfile = ({ isLoggedIn }) => {
 	const userState = useSelector((state) => state.userState);
-
-	// actions
-	const dispatch = useDispatch();
-
 	const {
 		register,
 		handleSubmit,
@@ -27,52 +21,26 @@ const Register = ({ history }) => {
 	} = useForm({ mode: 'onBlur' });
 
 	const submit = (data) => {
-		dispatch(
-			UserActionCreators.register(
-				data.email,
-				data.username,
-				data.password,
-				history
-			)
-		);
+		// update profile URL endpoint
 	};
-
 	return (
-		<>
-			<form
-				noValidate
-				style={{
-					maxWidth: '400px',
-					margin: '5em auto',
-					padding: '0 2em',
-				}}
-				onSubmit={handleSubmit(submit)}
-				autoComplete="off"
-			>
-				<Typography variant="h4" sx={{ fontWeight: '500', margin: '0' }}>
-					Register
+		<section>
+			<ProfileBanner isLoggedIn={isLoggedIn} />
+			<Paper sx={{ margin: '20px auto', maxWidth: '600px' }} elevation={4}>
+				<Typography variant="h5" align="center" sx={{ pb: 0, pt: 3 }}>
+					Edit Profile
 				</Typography>
-				{userState.register_error && (
-					<Alert severity="error" sx={{ marginTop: '1em' }}>
-						{userState.register_error}
-					</Alert>
-				)}
-				{userState.register_message && (
-					<Alert severity="success">{userState.register_message}</Alert>
-				)}
-				<Paper
-					style={{ padding: 20 }}
-					elevation={3}
-					sx={{ margin: '2em auto' }}
+				<form
+					style={{ padding: '15px 30px' }}
+					onSubmit={handleSubmit(submit)}
 				>
 					<Grid container spacing={2}>
 						<Grid item xs={12}>
 							<TextField
-								required
 								error={!errors.username ? false : true}
 								label="User Name"
 								variant="standard"
-								sx={{ width: '100%' }}
+								sx={{ maxWidth: '600px', width: '100%' }}
 								{...register('username', {
 									required: {
 										value: true,
@@ -91,7 +59,7 @@ const Register = ({ history }) => {
 								error={!errors.email ? false : true}
 								label="Email"
 								variant="standard"
-								sx={{ width: '100%' }}
+								sx={{ maxWidth: '600px', width: '100%' }}
 								{...register('email', {
 									required: {
 										value: true,
@@ -109,25 +77,44 @@ const Register = ({ history }) => {
 						</Grid>
 						<Grid item xs={12}>
 							<TextField
-								type="password"
+								type="text"
 								required
-								error={!errors.password ? false : true}
-								label="Password"
+								error={!errors.location ? false : true}
+								label="Location"
 								variant="standard"
-								sx={{ width: '100%' }}
-								{...register('password', {
+								sx={{ maxWidth: '600px', width: '100%' }}
+								{...register('location', {
 									required: {
 										value: true,
 										message: 'Field is required',
 									},
-									minLength: {
-										value: 6,
-										message: 'Minimum length is 6 characters',
+								})}
+							/>
+							<Form.Text style={{ color: '#d32f2f' }}>
+								{errors?.location?.message}
+							</Form.Text>
+						</Grid>
+						<Grid item xs={12}>
+							<TextareaAutosize
+								error={!errors.bio ? false : true}
+								required
+								minRows={5}
+								aria-label="Bio"
+								placeholder="Your bio..."
+								style={{
+									maxWidth: '900px',
+									width: '100%',
+									padding: '10px',
+								}}
+								{...register('bio', {
+									required: {
+										value: true,
+										message: 'Field is required',
 									},
 								})}
 							/>
 							<Form.Text style={{ color: '#d32f2f' }}>
-								{errors?.password?.message}
+								{errors?.bio?.message}
 							</Form.Text>
 						</Grid>
 						<Grid item xs={12}>
@@ -136,7 +123,6 @@ const Register = ({ history }) => {
 								color="primary"
 								type="submit"
 								sx={{
-									width: '100%',
 									margin: '0.5em 0',
 									backgroundColor: '#18A999',
 								}}
@@ -145,10 +131,10 @@ const Register = ({ history }) => {
 							</Button>
 						</Grid>
 					</Grid>
-				</Paper>
-			</form>
-		</>
+				</form>
+			</Paper>
+		</section>
 	);
 };
 
-export default Register;
+export default EditProfile;

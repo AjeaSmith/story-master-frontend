@@ -1,9 +1,10 @@
 import React from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import { Stack, Avatar, Typography, Box, Button, Grid } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Typography, Box, Grid, Button } from '@mui/material';
 import StoryCard from '../../components/storycard/StoryCard';
+import ProfileBanner from '../../components/banner/ProfileBanner';
+import { Link } from 'react-router-dom';
 
 function TabPanel(props) {
 	const { children, value, index, ...other } = props;
@@ -39,55 +40,23 @@ const Profile = ({ match, isLoggedIn }) => {
 	};
 	return (
 		<>
-			<Box
-				component="section"
-				sx={{
-					width: '100%',
-					background: '#F3F4F6',
-					height: 250,
-					py: '25px',
-					display: 'flex',
-					alignItems: 'center',
-				}}
-			>
-				<Stack
-					sx={{
-						maxWidth: 500,
-						mx: 'auto',
-						display: 'flex',
-						alignItems: 'center',
-					}}
-					spacing={2}
-				>
-					<Avatar
+			<ProfileBanner isLoggedIn={isLoggedIn}>
+				{isLoggedIn ? (
+					<Button
+						size="small"
+						color="primary"
 						sx={{
-							bgcolor: '#18A999',
-							width: 65,
-							height: 65,
+							textAlign: 'center',
+							backgroundColor: '#18A999',
+							px: 2,
 						}}
 					>
-						OP
-					</Avatar>
-					<Typography variant="h5">@admin</Typography>
-					<Typography variant="subtitle1">
-						<span className="profile__detailheader">Active Since: </span>
-						Oct 20, 2021
-					</Typography>
-					{isLoggedIn ? (
-						<Button
-							color="primary"
-							sx={{
-								textAlign: 'center',
-								backgroundColor: '#18A999',
-							}}
-						>
-							<Link to="/edit" style={{ color: 'white' }}>
-								Edit Profile
-							</Link>
-						</Button>
-					) : null}
-				</Stack>
-			</Box>
+						<Link to="/edit/profile/1" style={{ color: 'white' }}>
+							Edit Profile
+						</Link>
+					</Button>
+				) : null}
+			</ProfileBanner>
 			<Box sx={{ width: '100%' }}>
 				<Box
 					sx={{
@@ -121,11 +90,8 @@ const Profile = ({ match, isLoggedIn }) => {
 				<TabPanel value={value} index={1}>
 					<Grid container spacing={2}>
 						<StoryCard isLoggedIn={isLoggedIn} />
-
 						<StoryCard isLoggedIn={isLoggedIn} />
-
 						<StoryCard isLoggedIn={isLoggedIn} />
-
 						<StoryCard isLoggedIn={isLoggedIn} />
 					</Grid>
 				</TabPanel>

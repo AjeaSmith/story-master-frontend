@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Typography, TextField, Box } from '@mui/material';
+import { Container, Typography, TextField } from '@mui/material';
 
 const createStory = () => {
 	return (

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Router, Switch, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import Header from './components/header/Header';
@@ -7,48 +7,35 @@ import Profile from './pages/profile/Profile';
 import Register from './pages/register/Register';
 import Login from './pages/login/Login';
 import EditProfile from './pages/profile/EditProfile';
+import CreateStory from './pages/story/createStory';
 import { createBrowserHistory } from 'history';
-import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { authenticatedUser } from './redux/auth/authActions';
 
 const customHistory = createBrowserHistory();
 
+const StyledPage = styled.section`
+	height: 100vh;
+`;
+
 function App() {
-	const StyledPage = styled.section`
-		height: 100vh;
-	`;
-	const [isLoggedIn, setIsLoggedIn] = useState(false);
+	const dispatch = useDispatch();
+	const authState = useSelector((state) => state.authState);
 	useEffect(() => {
-		return axios
-			.get('http://localhost:8080/api/user/authenticated', {
-				withCredentials: true,
-			})
-			.then(({ data }) => {
-				setIsLoggedIn(data.authenticated);
-			})
-			.catch((err) => {
-				console.log(err);
-			});
-	}, [isLoggedIn]);
+		dispatch(authenticatedUser());
+	}, [dispatch]);
+	console.log('from global state', authState.authenticated);
 	return (
 		<StyledPage>
 			<Router history={customHistory}>
-				<Header history={customHistory} isLoggedIn={isLoggedIn} />
+				<Header history={customHistory} />
 				<Switch>
-					<Route
-						exact
-						path="/"
-						render={() => <Home isLoggedIn={isLoggedIn} />}
-					/>
+					<Route exact path="/" render={() => <Home />} />
 					<Route path="/register" component={Register} />
 					<Route path="/login" component={Login} />
-					<Route
-						path="/profile/:id"
-						render={() => <Profile isLoggedIn={isLoggedIn} />}
-					/>
-					<Route
-						path="/edit/profile/:id"
-						render={() => <EditProfile isLoggedIn={isLoggedIn} />}
-					/>
+					<Route path="/profile/:id" component={Profile} />
+					<Route path="/edit/profile/:id" component={EditProfile} />
+					<Route path="/story/create" component={CreateStory} />
 				</Switch>
 			</Router>
 		</StyledPage>

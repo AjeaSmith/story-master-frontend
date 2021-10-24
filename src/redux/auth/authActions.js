@@ -8,7 +8,10 @@ export const authenticatedUser = () => (dispatch) => {
 			console.log(data);
 			dispatch({
 				type: 'IS_AUTHENTICATED',
-				payload: data.authenticated,
+				payload: {
+					authenticated: data.authenticated,
+					userId: data.userId,
+				},
 			});
 		})
 		.catch((err) => {

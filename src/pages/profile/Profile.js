@@ -5,6 +5,7 @@ import { Typography, Box, Grid, Button } from '@mui/material';
 import StoryCard from '../../components/storycard/StoryCard';
 import ProfileBanner from '../../components/banner/ProfileBanner';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 function TabPanel(props) {
 	const { children, value, index, ...other } = props;
@@ -33,6 +34,7 @@ function tabProps(index) {
 	};
 }
 const Profile = ({ match, isLoggedIn }) => {
+	const authState = useSelector((state) => state.authState);
 	const [value, setValue] = React.useState(0);
 
 	const handleChange = (event, newValue) => {
@@ -40,8 +42,8 @@ const Profile = ({ match, isLoggedIn }) => {
 	};
 	return (
 		<>
-			<ProfileBanner isLoggedIn={isLoggedIn}>
-				{isLoggedIn ? (
+			<ProfileBanner>
+				{authState.authenticated ? (
 					<Button
 						size="small"
 						color="primary"

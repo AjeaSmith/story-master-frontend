@@ -1,13 +1,15 @@
 const initalState = {
 	authenticated: false,
+	userId: null,
 	loading: false,
 };
-const userReducer = (state = initalState, action) => {
+const authReducer = (state = initalState, action) => {
 	switch (action.type) {
 		case 'IS_AUTHENTICATED': {
 			return {
 				...state,
-				authenticated: action.payload,
+				authenticated: action.payload.authenticated,
+				userId: action.payload.userId,
 			};
 		}
 		case 'LOGOUT_PENDING': {
@@ -27,4 +29,4 @@ const userReducer = (state = initalState, action) => {
 			return state;
 	}
 };
-export default userReducer;
+export default authReducer;

@@ -25,7 +25,7 @@ const EditProfile = ({ isLoggedIn }) => {
 	};
 	return (
 		<section>
-			<ProfileBanner isLoggedIn={isLoggedIn} />
+			<ProfileBanner />
 			<Paper sx={{ margin: '20px auto', maxWidth: '600px' }} elevation={4}>
 				<Typography variant="h5" align="center" sx={{ pb: 0, pt: 3 }}>
 					Edit Profile
@@ -37,7 +37,6 @@ const EditProfile = ({ isLoggedIn }) => {
 					<Grid container spacing={2}>
 						<Grid item xs={12}>
 							<TextField
-								error={!errors.username ? false : true}
 								label="User Name"
 								variant="standard"
 								sx={{ maxWidth: '600px', width: '100%' }}
@@ -56,7 +55,6 @@ const EditProfile = ({ isLoggedIn }) => {
 							<TextField
 								type="email"
 								required
-								error={!errors.email ? false : true}
 								label="Email"
 								variant="standard"
 								sx={{ maxWidth: '600px', width: '100%' }}
@@ -79,7 +77,6 @@ const EditProfile = ({ isLoggedIn }) => {
 							<TextField
 								type="text"
 								required
-								error={!errors.location ? false : true}
 								label="Location"
 								variant="standard"
 								sx={{ maxWidth: '600px', width: '100%' }}
@@ -96,7 +93,6 @@ const EditProfile = ({ isLoggedIn }) => {
 						</Grid>
 						<Grid item xs={12}>
 							<TextareaAutosize
-								error={!errors.bio ? false : true}
 								required
 								minRows={5}
 								aria-label="Bio"

@@ -1,6 +1,5 @@
 import React from 'react';
 import Banner from '../../components/banner/Banner';
-// import Header from '../../components/header/Header';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import {
@@ -18,10 +17,9 @@ import {
 	StyledPara,
 } from './HomeStyle';
 
-const Home = ({ history, isLoggedIn }) => {
+const Home = () => {
 	return (
 		<>
-			{/* <Header history={history} isLoggedIn={isLoggedIn} /> */}
 			<Banner>
 				<div
 					style={{

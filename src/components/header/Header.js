@@ -10,20 +10,22 @@ import Menu from '@mui/material/Menu';
 import axios from 'axios';
 import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-const Header = ({ history, isLoggedIn }) => {
-	const logoutFunc = async () => {
+const Header = () => {
+	const logoutFunc = () => {
 		return axios
 			.get('http://localhost:8080/api/user/logout', {
 				withCredentials: true,
 			})
 			.then(() => {
-				history.push('/login');
+				return (window.location = '/login');
 			})
 			.catch((err) => {
 				console.log('logout err', err);
 			});
 	};
+	const authState = useSelector((state) => state.authState);
 
 	const [anchorEl, setAnchorEl] = React.useState(null);
 	const handleMenu = (event) => {
@@ -49,10 +51,12 @@ const Header = ({ history, isLoggedIn }) => {
 						Story Master
 					</Link>
 				</Typography>
-				{isLoggedIn ? (
+				{authState.authenticated ? (
 					<div>
 						<Button variant="outlined" color="inherit" sx={{ mr: 2 }}>
-							Tell Story
+							<Link to="/story/create" style={{ color: 'white' }}>
+								Tell Story
+							</Link>
 						</Button>
 						<IconButton
 							size="large"
@@ -80,9 +84,9 @@ const Header = ({ history, isLoggedIn }) => {
 							open={Boolean(anchorEl)}
 							onClose={handleClose}
 						>
-							<Link to="/profile">
-								<MenuItem onClick={handleClose}>Profile</MenuItem>
-							</Link>
+							<MenuItem>
+								<Link to="/profile/5">Profile</Link>
+							</MenuItem>
 							<MenuItem onClick={logoutFunc}>Logout</MenuItem>
 						</Menu>
 					</div>

@@ -7,7 +7,8 @@ import Profile from './pages/profile/Profile';
 import Register from './pages/register/Register';
 import Login from './pages/login/Login';
 import EditProfile from './pages/profile/EditProfile';
-import CreateStory from './pages/story/createStory';
+import CreateStory from './pages/story/CreateStory';
+import ViewStory from './pages/story/ViewStory';
 import { createBrowserHistory } from 'history';
 import { useDispatch, useSelector } from 'react-redux';
 import { authenticatedUser } from './redux/auth/authActions';
@@ -30,12 +31,13 @@ function App() {
 			<Router history={customHistory}>
 				<Header history={customHistory} />
 				<Switch>
-					<Route exact path="/" render={() => <Home />} />
+					<Route exact path="/" component={Home} />
 					<Route path="/register" component={Register} />
 					<Route path="/login" component={Login} />
 					<Route path="/profile/:id" component={Profile} />
 					<Route path="/edit/profile/:id" component={EditProfile} />
 					<Route path="/story/create" component={CreateStory} />
+					<Route path="/view/story" component={ViewStory} />
 				</Switch>
 			</Router>
 		</StyledPage>

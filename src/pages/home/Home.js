@@ -16,7 +16,6 @@ import {
 	StyledHeading2,
 	StyledPara,
 } from './HomeStyle';
-
 const Home = () => {
 	return (
 		<>

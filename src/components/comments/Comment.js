@@ -127,7 +127,22 @@ const Comment = () => {
 									variant="body2"
 									color="text.primary"
 								>
-									Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet repellendus temporibus neque aperiam molestias ea illum, aspernatur vel dolor praesentium ex facere sunt itaque saepe expedita! Iure fugit explicabo repellat, nam delectus asperiores quidem nobis. Similique accusantium nulla voluptas sunt temporibus corporis quidem repudiandae ipsa veritatis molestiae? Magnam, enim doloremque! Debitis, magnam esse, dicta ut, repellendus obcaecati numquam ipsa ipsum repudiandae tempore ipsam sit alias non praesentium est nesciunt ex veritatis iusto corrupti ad tenetur placeat. Alias in, voluptatem impedit dicta ducimus unde ipsam, expedita eligendi pariatur et architecto consequatur accusantium velit reprehenderit tempore ipsum vel, soluta obcaecati. Quod, necessitatibus.
+									Lorem ipsum dolor sit, amet consectetur adipisicing
+									elit. Amet repellendus temporibus neque aperiam
+									molestias ea illum, aspernatur vel dolor praesentium
+									ex facere sunt itaque saepe expedita! Iure fugit
+									explicabo repellat, nam delectus asperiores quidem
+									nobis. Similique accusantium nulla voluptas sunt
+									temporibus corporis quidem repudiandae ipsa veritatis
+									molestiae? Magnam, enim doloremque! Debitis, magnam
+									esse, dicta ut, repellendus obcaecati numquam ipsa
+									ipsum repudiandae tempore ipsam sit alias non
+									praesentium est nesciunt ex veritatis iusto corrupti
+									ad tenetur placeat. Alias in, voluptatem impedit
+									dicta ducimus unde ipsam, expedita eligendi pariatur
+									et architecto consequatur accusantium velit
+									reprehenderit tempore ipsum vel, soluta obcaecati.
+									Quod, necessitatibus.
 								</Typography>
 							</React.Fragment>
 						}

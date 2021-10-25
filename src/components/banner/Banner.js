@@ -7,7 +7,7 @@ const Banner = ({ children }) => {
 			component="section"
 			sx={{
 				width: '100%',
-				height: 380,
+				height: '70%',
 				background: `linear-gradient(45deg, rgba(255, 255, 255, .7), rgba(255,255,255,.7)), url(${artImg})`,
 				backgroundPosition: 'center',
 				backgroundSize: 'cover',

@@ -18,13 +18,13 @@ hr {
 .profile__detailheader {
 	font-weight: bold;
 }
-/* .demo-wrapper {
-	width: 100%;
-} */
+
 .demo-editor {
-	/* height: 80%; */
 	padding: 0 1.5em;
 }
 .textarea_autosize textarea {
 	resize: none;
+}
+.css-10hburv-MuiTypography-root {
+	font-size: 14px;
 }

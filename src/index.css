@@ -18,3 +18,10 @@ hr {
 .profile__detailheader {
 	font-weight: bold;
 }
+/* .demo-wrapper {
+	width: 100%;
+} */
+.demo-editor {
+	/* height: 80%; */
+	padding: 0 1.5em;
+}

@@ -1,6 +1,7 @@
 import React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
@@ -36,75 +37,77 @@ const Header = () => {
 	};
 	return (
 		<AppBar position="static" sx={{ background: '#00004d' }}>
-			<Toolbar>
-				<IconButton
-					size="large"
-					edge="start"
-					color="inherit"
-					aria-label="menu"
-					sx={{ mr: 2 }}
-				>
-					<LocalLibraryIcon fontSize="large" />
-				</IconButton>
-				<Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-					<Link to="/" style={{ color: 'white' }}>
-						Story Master
-					</Link>
-				</Typography>
-				{authState.authenticated ? (
-					<div>
-						<Button variant="outlined" color="inherit" sx={{ mr: 2 }}>
-							<Link to="/story/create" style={{ color: 'white' }}>
-								Tell Story
-							</Link>
-						</Button>
-						<IconButton
-							size="large"
-							aria-label="account of current user"
-							aria-controls="menu-appbar"
-							aria-haspopup="true"
-							onClick={handleMenu}
-							color="inherit"
-						>
-							<AccountCircle />
-						</IconButton>
+			<Container>
+				<Toolbar>
+					<IconButton
+						size="large"
+						edge="start"
+						color="inherit"
+						aria-label="menu"
+						sx={{ mr: 2 }}
+					>
+						<LocalLibraryIcon fontSize="large" />
+					</IconButton>
+					<Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+						<Link to="/" style={{ color: 'white' }}>
+							Story Master
+						</Link>
+					</Typography>
+					{authState.authenticated ? (
+						<div>
+							<Button variant="outlined" color="inherit" sx={{ mr: 2 }}>
+								<Link to="/story/create" style={{ color: 'white' }}>
+									Tell Story
+								</Link>
+							</Button>
+							<IconButton
+								size="large"
+								aria-label="account of current user"
+								aria-controls="menu-appbar"
+								aria-haspopup="true"
+								onClick={handleMenu}
+								color="inherit"
+							>
+								<AccountCircle />
+							</IconButton>
 
-						<Menu
-							id="menu-appbar"
-							anchorEl={anchorEl}
-							anchorOrigin={{
-								vertical: 'top',
-								horizontal: 'right',
-							}}
-							keepMounted
-							transformOrigin={{
-								vertical: 'top',
-								horizontal: 'right',
-							}}
-							open={Boolean(anchorEl)}
-							onClose={handleClose}
-						>
-							<MenuItem>
-								<Link to="/profile/5">Profile</Link>
-							</MenuItem>
-							<MenuItem onClick={logoutFunc}>Logout</MenuItem>
-						</Menu>
-					</div>
-				) : (
-					<>
-						<Button color="inherit">
-							<Link to="/login" style={{ color: 'white' }}>
-								Login
-							</Link>
-						</Button>
-						<Button color="inherit">
-							<Link to="/register" style={{ color: 'white' }}>
-								Register
-							</Link>
-						</Button>
-					</>
-				)}
-			</Toolbar>
+							<Menu
+								id="menu-appbar"
+								anchorEl={anchorEl}
+								anchorOrigin={{
+									vertical: 'top',
+									horizontal: 'right',
+								}}
+								keepMounted
+								transformOrigin={{
+									vertical: 'top',
+									horizontal: 'right',
+								}}
+								open={Boolean(anchorEl)}
+								onClose={handleClose}
+							>
+								<MenuItem>
+									<Link to="/profile/5">Profile</Link>
+								</MenuItem>
+								<MenuItem onClick={logoutFunc}>Logout</MenuItem>
+							</Menu>
+						</div>
+					) : (
+						<Toolbar>
+							<Button color="inherit">
+								<Link to="/login" style={{ color: 'white' }}>
+									Login
+								</Link>
+							</Button>
+							<Button color="inherit">
+								<Link to="/register" style={{ color: 'white' }}>
+									Register
+								</Link>
+							</Button>
+						</Toolbar>
+					)}
+				</Toolbar>
+			</Container>
 		</AppBar>
 	);
 };

@@ -37,7 +37,7 @@ function App() {
 					<Route path="/profile/:id" component={Profile} />
 					<Route path="/edit/profile/:id" component={EditProfile} />
 					<Route path="/story/create" component={CreateStory} />
-					<Route path="/view/story" component={ViewStory} />
+					<Route path="/view/story/:id" component={ViewStory} />
 				</Switch>
 			</Router>
 		</StyledPage>

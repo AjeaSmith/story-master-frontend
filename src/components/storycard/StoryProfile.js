@@ -8,7 +8,7 @@ import {
 	Grid,
 } from '@mui/material';
 
-const StoryCard = ({ isLoggedIn }) => {
+const StoryProfile = ({ isLoggedIn }) => {
 	return (
 		<Grid item xs={12} sm={12} md={3}>
 			<Card sx={{ maxWidth: 345, background: '#F3F4F6' }}>
@@ -35,4 +35,4 @@ const StoryCard = ({ isLoggedIn }) => {
 	);
 };
 
-export default StoryCard;
+export default StoryProfile;

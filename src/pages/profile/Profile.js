@@ -2,7 +2,7 @@ import React from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import { Typography, Box, Grid, Button } from '@mui/material';
-import StoryCard from '../../components/storycard/StoryCard';
+import StoryProfile from '../../components/storycard/StoryProfile';
 import ProfileBanner from '../../components/banner/ProfileBanner';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -91,10 +91,10 @@ const Profile = ({ match, isLoggedIn }) => {
 				</TabPanel>
 				<TabPanel value={value} index={1}>
 					<Grid container spacing={2}>
-						<StoryCard isLoggedIn={isLoggedIn} />
-						<StoryCard isLoggedIn={isLoggedIn} />
-						<StoryCard isLoggedIn={isLoggedIn} />
-						<StoryCard isLoggedIn={isLoggedIn} />
+						<StoryProfile isLoggedIn={isLoggedIn} />
+						<StoryProfile isLoggedIn={isLoggedIn} />
+						<StoryProfile isLoggedIn={isLoggedIn} />
+						<StoryProfile isLoggedIn={isLoggedIn} />
 					</Grid>
 				</TabPanel>
 			</Box>

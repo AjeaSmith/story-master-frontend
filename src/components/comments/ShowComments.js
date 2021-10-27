@@ -8,7 +8,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Comment from './Comment';
 
-const ShowComments = () => {
+const ShowComments = ({ comments }) => {
 	const [open, setOpen] = React.useState(false);
 
 	const handleClickOpen = () => {
@@ -39,7 +39,11 @@ const ShowComments = () => {
 				<DialogTitle id="scroll-dialog-title">All Comments</DialogTitle>
 				<DialogContent dividers={true}>
 					<DialogContentText id="scroll-dialog-description">
-						<Comment />
+						{!comments.length ? (
+							<p>No comments</p>
+						) : (
+							<Comment comments={comments} />
+						)}
 					</DialogContentText>
 				</DialogContent>
 				<DialogActions>

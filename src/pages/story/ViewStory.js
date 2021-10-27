@@ -1,66 +1,71 @@
-import React from 'react';
-import { Stack, Typography, Box, Container, Button } from '@mui/material';
+import React, { useEffect } from 'react';
+import { Stack, Typography, Box, Container } from '@mui/material';
 import ShowComments from '../../components/comments/ShowComments';
+import { useDispatch, useSelector } from 'react-redux';
+import { getStoryById } from '../../redux/story/actions/storyActions';
+import { Link } from 'react-router-dom';
 
-const ViewStory = () => {
+const ViewStory = ({ match }) => {
+	const dispatch = useDispatch();
+	const { story, loading } = useSelector((state) => state.storyState);
+	useEffect(() => {
+		dispatch(getStoryById(match.params.id));
+	}, [match.params.id]);
 	return (
 		<>
-			<Box
-				component="section"
-				sx={{
-					width: '100%',
-					background: '#F3F4F6',
-					height: 200,
-					py: '25px',
-					display: 'flex',
-					alignItems: 'center',
-					mb: 3,
-				}}
-			>
-				<Stack
-					sx={{
-						maxWidth: 500,
-						mx: 'auto',
-						display: 'flex',
-						alignItems: 'center',
-					}}
-					spacing={2}
-				>
-					<Typography variant="h3">
-						The long project home{' '}
-						<span>
-							<Typography
-								variant="body1"
-								align="center"
-								sx={{
-									mt: 2,
-								}}
-							>
-								by: @admin
+			{loading || story == null ? (
+				<p>Loading...</p>
+			) : (
+				<>
+					<Box
+						component="section"
+						sx={{
+							width: '100%',
+							background: '#F3F4F6',
+							height: 250,
+							py: '25px',
+							display: 'flex',
+							alignItems: 'center',
+							mb: 3,
+						}}
+					>
+						<Stack
+							sx={{
+								maxWidth: 500,
+								mx: 'auto',
+								display: 'flex',
+								alignItems: 'center',
+							}}
+							spacing={2}
+						>
+							<Typography variant="h4" align="center">
+								{story.title}
+								<span>
+									<Typography
+										variant="body1"
+										align="center"
+										sx={{
+											mt: 2,
+										}}
+									>
+										by:{' '}
+										<Link
+											to={`/profile/${story.author._id}`}
+											style={{ color: '#7A7AA2' }}
+										>
+											@{story.author.username}
+										</Link>
+									</Typography>
+								</span>
 							</Typography>
-						</span>
-					</Typography>
-					<ShowComments />
-				</Stack>
-			</Box>
-			<Container>
-				<p>
-					Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-					Reiciendis sit nostrum architecto at, amet distinctio tempore.
-					Necessitatibus eum at recusandae doloremque fugiat blanditiis,
-					debitis veniam odit, beatae obcaecati corrupti natus possimus rem
-					laborum magnam, aperiam dolore nisi! Expedita voluptates ipsa
-					dolores iste modi, cum, quo et dolorum quaerat numquam laborum!
-					<br />
-					<br />
-					Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quasi,
-					tempora numquam itaque facere possimus id odio soluta laborum
-					corrupti quam eius, enim, suscipit quod doloribus! Vitae minima
-					amet laborum culpa nobis dicta tempore, temporibus facere quis?
-					Possimus inventore sit voluptatem eos nemo praesentium vel
-					mollitia ipsa cum temporibus, accusantium sapiente.
-				</p>
-			</Container>
+							<ShowComments comments={story.comments} />
+						</Stack>
+					</Box>
+					<Container>
+						<p>{story.text}</p>
+					</Container>
+				</>
+			)}
 		</>
 	);
 };

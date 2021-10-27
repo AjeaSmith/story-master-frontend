@@ -1,5 +1,6 @@
 const initalState = {
 	stories: [],
+	story: null,
 	loading: false,
 	error: null,
 };
@@ -16,6 +17,13 @@ const storyReducer = (state = initalState, action) => {
 				...state,
 				loading: false,
 				stories: action.payload,
+			};
+		}
+		case 'ONE_STORY_SUCCESS': {
+			return {
+				...state,
+				loading: false,
+				story: action.payload,
 			};
 		}
 		case 'STORY_FAIL': {

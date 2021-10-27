@@ -10,7 +10,7 @@ import EditProfile from './pages/profile/EditProfile';
 import CreateStory from './pages/story/CreateStory';
 import ViewStory from './pages/story/ViewStory';
 import { createBrowserHistory } from 'history';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { authenticatedUser } from './redux/auth/authActions';
 
 const customHistory = createBrowserHistory();
@@ -21,11 +21,10 @@ const StyledPage = styled.section`
 
 function App() {
 	const dispatch = useDispatch();
-	const authState = useSelector((state) => state.authState);
 	useEffect(() => {
 		dispatch(authenticatedUser());
 	}, [dispatch]);
-	console.log('from global state', authState.authenticated);
+
 	return (
 		<StyledPage>
 			<Router history={customHistory}>

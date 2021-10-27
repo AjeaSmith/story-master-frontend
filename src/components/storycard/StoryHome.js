@@ -9,10 +9,10 @@ import {
 	Avatar,
 } from '@mui/material/';
 import { Link } from 'react-router-dom';
-const StoryHome = ({ story }) => {
+const StoryHome = ({ story, id }) => {
 	return (
 		<>
-			<ListItem alignItems="flex-start" key={story._id}>
+			<ListItem alignItems="flex-start" key={id}>
 				<ListItemAvatar>
 					<Avatar
 						sx={{ width: 40, height: 40 }}
@@ -22,7 +22,7 @@ const StoryHome = ({ story }) => {
 				</ListItemAvatar>
 				<ListItemText
 					sx={{ fontSize: '12px' }}
-					primary={`@${story.author.username} - ${story.createdAt}`}
+					primary={`${story.author.username} - ${story.createdAt}`}
 					secondary={
 						<React.Fragment>
 							<h3>{story.title}</h3>

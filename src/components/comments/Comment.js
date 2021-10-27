@@ -7,7 +7,7 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 
-const Comment = () => {
+const Comment = ({ comments }) => {
 	return (
 		<div>
 			<List

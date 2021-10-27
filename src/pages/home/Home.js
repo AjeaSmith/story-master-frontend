@@ -16,8 +16,7 @@ const Home = () => {
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(getStories());
-	}, []);
-	console.log(stories);
+	}, [dispatch]);
 	return (
 		<>
 			<Banner>
@@ -87,10 +86,16 @@ const Home = () => {
 							{stories.length > 0 ? (
 								<>
 									{stories.map((story) => {
-										return <StoryHome story={story} />;
+										return (
+											<div key={story._id}>
+												<StoryHome story={story} />;
+											</div>
+										);
 									})}
 								</>
-							) : null}
+							) : (
+								<p>No stories to show!</p>
+							)}
 						</List>
 					</StyledContent>
 				</StyledContainer>

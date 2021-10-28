@@ -28,9 +28,7 @@ const CreateStory = ({ history }) => {
 	};
 
 	const saveToDB = async (data) => {
-		const text = JSON.stringify(
-			draftToHtml(convertToRaw(editorState.getCurrentContent()))
-		);
+		const text = draftToHtml(convertToRaw(editorState.getCurrentContent()));
 		if (!editorState.getCurrentContent().hasText()) {
 			setEditorError('Body field is required');
 			return false;
@@ -104,17 +102,6 @@ const CreateStory = ({ history }) => {
 						</Button>
 					</Grid>
 				</Grid>
-				{/* <div style={{ padding: 4 }}>
-					{
-						<div
-							dangerouslySetInnerHTML={{
-								__html: draftToHtml(
-									convertToRaw(editorState.getCurrentContent())
-								),
-							}}
-						/>
-					}
-				</div> */}
 			</form>
 		</Container>
 	);

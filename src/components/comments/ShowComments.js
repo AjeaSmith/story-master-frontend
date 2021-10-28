@@ -1,6 +1,5 @@
 import React from 'react';
 import Button from '@mui/material/Button';
-import TextareaAutosize from '@mui/material/TextareaAutosize';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -47,8 +46,7 @@ const ShowComments = ({ comments }) => {
 					</DialogContentText>
 				</DialogContent>
 				<DialogActions>
-					<TextareaAutosize
-						className="textarea_autosize"
+					<textarea
 						minRows={2}
 						maxRows={3}
 						aria-label="maximum height"

@@ -9,6 +9,7 @@ import {
 	Avatar,
 } from '@mui/material/';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 const StoryHome = ({ story, id }) => {
 	return (
 		<>
@@ -22,19 +23,29 @@ const StoryHome = ({ story, id }) => {
 				</ListItemAvatar>
 				<ListItemText
 					sx={{ fontSize: '12px' }}
-					primary={`${story.author.username} - ${story.createdAt}`}
+					primary={`${story.author.username} - ${moment(
+						story.createdAt
+					).format('MM/DD')}`}
 					secondary={
 						<React.Fragment>
 							<h3>{story.title}</h3>
 							<Typography
 								sx={{ display: 'inline' }}
-								component="span"
+								component="div"
 								variant="body2"
 								color="text.primary"
 							>
-								{story.text.length > 100
-									? `${story.text.slice(0, 100)}...`
-									: `${story.text}`}
+								{
+									<div
+										dangerouslySetInnerHTML={{
+											__html: `${
+												story.text.length > 100
+													? `${story.text.slice(0, 100)}...`
+													: `${story.text}`
+											}`,
+										}}
+									/>
+								}
 							</Typography>
 						</React.Fragment>
 					}

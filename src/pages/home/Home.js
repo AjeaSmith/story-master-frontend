@@ -11,13 +11,13 @@ import { getStories } from '../../redux/story/actions/storyActions';
 import StoryHome from '../../components/storycard/StoryHome';
 
 const Home = () => {
-	const { authenticated, userId } = useSelector((state) => state.authState);
+	const { authenticated } = useSelector((state) => state.authState);
 	const { stories } = useSelector((state) => state.storyState);
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(getStories());
 	}, [dispatch]);
-	console.log(userId);
+
 	return (
 		<>
 			<Banner>

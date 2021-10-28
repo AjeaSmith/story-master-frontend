@@ -21,7 +21,7 @@ export const getStoryById = (id) => (dispatch) => {
 			console.log(err);
 		});
 };
-export const addStory = (title, text) => (dispatch) => {
+export const addStory = ({ title, text }) => (dispatch) => {
 	dispatch({ type: 'STORY_PENDING' });
 	return axios
 		.post(
@@ -37,10 +37,11 @@ export const addStory = (title, text) => (dispatch) => {
 		)
 		.then(({ data }) => {
 			console.log(data);
-			dispatch({ type: 'CREATE_STORY_SUCCESS', payload: data });
+			dispatch({ type: 'CREATE_STORY_SUCCESS', payload: data.message });
 
 			setTimeout(() => {
-				window.location('/');
+				window.location = '/';
+				dispatch({ type: 'RESET' });
 			}, 2000);
 		})
 		.catch((err) => {

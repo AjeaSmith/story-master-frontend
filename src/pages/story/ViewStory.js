@@ -66,7 +66,7 @@ const ViewStory = ({ match }) => {
 							{
 								<div
 									dangerouslySetInnerHTML={{
-										__html: `${JSON.parse(story.text)}`,
+										__html: `${story.text}`,
 									}}
 								/>
 							}

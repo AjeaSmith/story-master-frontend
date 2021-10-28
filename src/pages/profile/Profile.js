@@ -46,27 +46,32 @@ const Profile = ({ match, isLoggedIn }) => {
 	useEffect(() => {
 		dispatch(getProfile(match.params.id));
 	}, [match.params.id, dispatch]);
-
 	return (
 		<>
 			<ProfileBanner>
-				{authenticated ? (
-					<Button
-						size="small"
-						color="primary"
-						sx={{
-							textAlign: 'center',
-							backgroundColor: '#18A999',
-							px: 2,
-						}}
-					>
-						<Link to="/edit/profile/1" style={{ color: 'white' }}>
-							Edit Profile
-						</Link>
-					</Button>
-				) : null}
+				{loading || profile === null ? (
+					<p>Loading...</p>
+				) : (
+					<>
+						{authenticated && match.params.id === profile._id ? (
+							<Button
+								size="small"
+								color="primary"
+								sx={{
+									textAlign: 'center',
+									backgroundColor: '#18A999',
+									px: 2,
+								}}
+							>
+								<Link to="/edit/profile/1" style={{ color: 'white' }}>
+									Edit Profile
+								</Link>
+							</Button>
+						) : null}
+					</>
+				)}
 			</ProfileBanner>
-			{loading || profile == null ? (
+			{loading || profile === null ? (
 				<p>loading</p>
 			) : (
 				<Box sx={{ width: '100%' }}>
@@ -100,10 +105,12 @@ const Profile = ({ match, isLoggedIn }) => {
 						<Grid container spacing={2}>
 							{profile.publishedStories.map((story) => {
 								return (
-									<StoryProfile
-										isLoggedIn={isLoggedIn}
-										story={story}
-									/>
+									<div key={story._id}>
+										<StoryProfile
+											isLoggedIn={isLoggedIn}
+											story={story}
+										/>
+									</div>
 								);
 							})}
 						</Grid>

@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 
 const StoryProfile = ({ isLoggedIn, story }) => {
 	return (
-		<Grid item xs={12} sm={12} md={3} key={story._id}>
+		<Grid item xs={12} sm={12} md={3}>
 			<Card sx={{ maxWidth: 345, background: '#F3F4F6' }}>
 				<CardContent>
 					<Typography gutterBottom variant="h5" component="div">

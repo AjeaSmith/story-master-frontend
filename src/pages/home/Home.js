@@ -11,12 +11,13 @@ import { getStories } from '../../redux/story/actions/storyActions';
 import StoryHome from '../../components/storycard/StoryHome';
 
 const Home = () => {
-	const authState = useSelector((state) => state.authState);
+	const { authenticated, userId } = useSelector((state) => state.authState);
 	const { stories } = useSelector((state) => state.storyState);
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(getStories());
 	}, [dispatch]);
+	console.log(userId);
 	return (
 		<>
 			<Banner>
@@ -48,7 +49,7 @@ const Home = () => {
 						Expedita saepe eos error harum quos praesentium odio
 						voluptatum quas reprehenderit. Explicabo!
 					</Typography>
-					{authState.authenticated ? (
+					{authenticated ? (
 						<Button
 							variant="contained"
 							sx={{ backgroundColor: '#18A999', margin: '12px 0' }}
@@ -88,7 +89,7 @@ const Home = () => {
 									{stories.map((story) => {
 										return (
 											<div key={story._id}>
-												<StoryHome story={story} />;
+												<StoryHome story={story} />
 											</div>
 										);
 									})}

@@ -26,7 +26,7 @@ const Header = () => {
 				console.log('logout err', err);
 			});
 	};
-	const authState = useSelector((state) => state.authState);
+	const { authenticated, userId } = useSelector((state) => state.authState);
 
 	const [anchorEl, setAnchorEl] = React.useState(null);
 	const handleMenu = (event) => {
@@ -35,6 +35,7 @@ const Header = () => {
 	const handleClose = () => {
 		setAnchorEl(null);
 	};
+	console.log(userId);
 	return (
 		<AppBar position="static" sx={{ background: '#00004d' }}>
 			<Container>
@@ -53,7 +54,7 @@ const Header = () => {
 							Story Master
 						</Link>
 					</Typography>
-					{authState.authenticated ? (
+					{authenticated ? (
 						<div>
 							<Button variant="outlined" color="inherit" sx={{ mr: 2 }}>
 								<Link to="/story/create" style={{ color: 'white' }}>
@@ -87,7 +88,7 @@ const Header = () => {
 								onClose={handleClose}
 							>
 								<MenuItem>
-									<Link to="/profile/5">Profile</Link>
+									<Link to={`/profile/${userId}`}>Profile</Link>
 								</MenuItem>
 								<MenuItem onClick={logoutFunc}>Logout</MenuItem>
 							</Menu>

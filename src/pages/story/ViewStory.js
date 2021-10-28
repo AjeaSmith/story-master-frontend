@@ -6,8 +6,8 @@ import { getStoryById } from '../../redux/story/actions/storyActions';
 import { Link } from 'react-router-dom';
 
 const ViewStory = ({ match }) => {
-	const dispatch = useDispatch();
 	const { story, loading } = useSelector((state) => state.storyState);
+	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(getStoryById(match.params.id));
 	}, [match.params.id]);
@@ -62,7 +62,15 @@ const ViewStory = ({ match }) => {
 						</Stack>
 					</Box>
 					<Container>
-						<p>{story.text}</p>
+						<div>
+							{
+								<div
+									dangerouslySetInnerHTML={{
+										__html: `${JSON.parse(story.text)}`,
+									}}
+								/>
+							}
+						</div>
 					</Container>
 				</>
 			)}

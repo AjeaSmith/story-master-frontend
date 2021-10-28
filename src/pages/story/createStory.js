@@ -13,17 +13,32 @@ import {
 	Button,
 } from '@mui/material';
 import { useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
+import { addStory } from '../../redux/story/actions/storyActions';
 
-const CreateStory = () => {
+const CreateStory = ({ history }) => {
+	const { message, loading } = useSelector((state) => state.storyState);
 	const [editorState, setEditorState] = useState(EditorState.createEmpty());
+	const [editorError, setEditorError] = useState('');
+
+	const dispatch = useDispatch();
 
 	const onEditorStateChange = (editorState) => {
-		console.log(editorState);
 		setEditorState(editorState);
 	};
 
 	const saveToDB = async (data) => {
-		console.log(data);
+		const text = JSON.stringify(
+			draftToHtml(convertToRaw(editorState.getCurrentContent()))
+		);
+		if (!editorState.getCurrentContent().hasText()) {
+			setEditorError('Body field is required');
+			return false;
+		} else {
+			setEditorError('');
+			const storyData = { title: data.title, text: text };
+			dispatch(addStory(storyData));
+		}
 	};
 	const {
 		register,
@@ -43,9 +58,14 @@ const CreateStory = () => {
 						{errors?.title?.message}
 					</Alert>
 				)}
-				{errors?.body?.message && (
+				{editorError.length > 0 && (
 					<Alert severity="error" sx={{ mb: 1 }}>
-						{errors?.body?.message}
+						{editorError}
+					</Alert>
+				)}
+				{message && (
+					<Alert severity="success" sx={{ mb: 1 }}>
+						{message}
 					</Alert>
 				)}
 				<Grid container>
@@ -58,7 +78,7 @@ const CreateStory = () => {
 							{...register('title', {
 								required: {
 									value: true,
-									message: 'Field is required',
+									message: 'Title field is required',
 								},
 							})}
 						/>
@@ -80,17 +100,11 @@ const CreateStory = () => {
 						sx={{ mt: 2, display: 'flex', justifyContent: 'right' }}
 					>
 						<Button variant="contained" type="submit">
-							Submit
+							{loading ? 'Loading...' : 'Submit'}
 						</Button>
 					</Grid>
 				</Grid>
 				{/* <div style={{ padding: 4 }}>
-					JSON string:
-					{JSON.stringify(
-						draftToHtml(convertToRaw(editorState.getCurrentContent()))
-					)}
-					<hr />
-					draft output:
 					{
 						<div
 							dangerouslySetInnerHTML={{

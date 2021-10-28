@@ -21,3 +21,30 @@ export const getStoryById = (id) => (dispatch) => {
 			console.log(err);
 		});
 };
+export const addStory = (title, text) => (dispatch) => {
+	dispatch({ type: 'STORY_PENDING' });
+	return axios
+		.post(
+			`http://localhost:8080/api/story/add/`,
+			{
+				title,
+				text,
+			},
+			{
+				headers: { 'Content-Type': 'application/json' },
+				withCredentials: true,
+			}
+		)
+		.then(({ data }) => {
+			console.log(data);
+			dispatch({ type: 'CREATE_STORY_SUCCESS', payload: data });
+
+			setTimeout(() => {
+				window.location('/');
+			}, 2000);
+		})
+		.catch((err) => {
+			console.log(err);
+			dispatch({ type: 'CREATE_STORY_FAIL', payload: err });
+		});
+};

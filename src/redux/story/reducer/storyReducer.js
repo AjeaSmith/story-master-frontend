@@ -33,6 +33,21 @@ const storyReducer = (state = initalState, action) => {
 				error: action.payload,
 			};
 		}
+
+		case 'CREATE_STORY_SUCCESS': {
+			return {
+				...state,
+				loading: false,
+				message: action.payload,
+			};
+		}
+		case 'CREATE_STORY_FAIL': {
+			return {
+				...state,
+				loading: false,
+				error: action.payload,
+			};
+		}
 		default:
 			return state;
 	}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Stack, Avatar, Typography, Box } from '@mui/material';
 import { useSelector } from 'react-redux';
+import moment from 'moment';
 
 const ProfileBanner = ({ children }) => {
 	const { profile, loading } = useSelector((state) => state.profileState);
@@ -43,7 +44,7 @@ const ProfileBanner = ({ children }) => {
 							<span className="profile__detailheader">
 								Active Since:{' '}
 							</span>
-							{profile.createdAt}
+							{moment(profile.createdAt).format('ll')}
 						</Typography>
 						{children}
 					</Stack>

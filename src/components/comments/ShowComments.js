@@ -47,8 +47,8 @@ const ShowComments = ({ comments }) => {
 				</DialogContent>
 				<DialogActions>
 					<textarea
-						minRows={2}
-						maxRows={3}
+						minrows={2}
+						maxrows={3}
 						aria-label="maximum height"
 						placeholder="Add Comment"
 						style={{

@@ -10,7 +10,7 @@ import {
 } from '@mui/material/';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
-const StoryHome = ({ story, id }) => {
+const AllStoriesComponent = ({ story, id }) => {
 	return (
 		<>
 			<ListItem alignItems="flex-start" key={id}>
@@ -22,10 +22,9 @@ const StoryHome = ({ story, id }) => {
 					/>
 				</ListItemAvatar>
 				<ListItemText
-					sx={{ fontSize: '12px' }}
 					primary={`${story.author.username} - ${moment(
 						story.createdAt
-					).format('MM/DD')}`}
+					).format('MMM DD')}`}
 					secondary={
 						<React.Fragment>
 							<h3>{story.title}</h3>
@@ -64,4 +63,4 @@ const StoryHome = ({ story, id }) => {
 	);
 };
 
-export default StoryHome;
+export default AllStoriesComponent;

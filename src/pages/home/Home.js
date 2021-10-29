@@ -8,16 +8,15 @@ import Divider from '@mui/material/Divider';
 import Banner from '../../components/banner/Banner';
 import { StyledSection, StyledContent, StyledContainer } from './HomeStyle';
 import { getStories } from '../../redux/story/actions/storyActions';
-import StoryHome from '../../components/storycard/StoryHome';
+import AllStoriesComponent from '../../components/story/AllStoriesComponent';
 
 const Home = () => {
-	const { authenticated } = useSelector((state) => state.authState);
+	const { authenticated, userId } = useSelector((state) => state.authState);
 	const { stories } = useSelector((state) => state.storyState);
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(getStories());
 	}, [dispatch]);
-
 	return (
 		<>
 			<Banner>
@@ -89,7 +88,7 @@ const Home = () => {
 									{stories.map((story) => {
 										return (
 											<div key={story._id}>
-												<StoryHome story={story} />
+												<AllStoriesComponent story={story} />
 											</div>
 										);
 									})}

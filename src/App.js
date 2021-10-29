@@ -21,6 +21,7 @@ const StyledPage = styled.section`
 
 function App() {
 	const dispatch = useDispatch();
+
 	useEffect(() => {
 		dispatch(authenticatedUser());
 	}, [dispatch]);

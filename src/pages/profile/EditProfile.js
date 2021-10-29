@@ -1,6 +1,5 @@
 import React from 'react';
-import ProfileBanner from '../../components/banner/ProfileBanner';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import {
@@ -10,10 +9,16 @@ import {
 	Paper,
 	Typography,
 	TextareaAutosize,
+	Alert,
 } from '@mui/material';
+import { editProfile } from '../../redux/profile/actions/profileActions';
 
-const EditProfile = ({ isLoggedIn }) => {
-	const userState = useSelector((state) => state.userState);
+const EditProfile = ({ match }) => {
+	// const { loading } = useSelector((state) => state.userState);
+	const { message, error, loading } = useSelector(
+		(state) => state.profileState
+	);
+	const dispatch = useDispatch();
 	const {
 		register,
 		handleSubmit,
@@ -21,15 +26,24 @@ const EditProfile = ({ isLoggedIn }) => {
 	} = useForm({ mode: 'onBlur' });
 
 	const submit = (data) => {
-		// update profile URL endpoint
+		dispatch(editProfile(match.params.id, data));
 	};
 	return (
 		<section>
-			<ProfileBanner />
 			<Paper sx={{ margin: '20px auto', maxWidth: '600px' }} elevation={4}>
 				<Typography variant="h5" align="center" sx={{ pb: 0, pt: 3 }}>
 					Edit Profile
 				</Typography>
+				{message && (
+					<Alert severity="success" sx={{ my: 3 }}>
+						{message}
+					</Alert>
+				)}
+				{error && (
+					<Alert severity="error" sx={{ my: 3 }}>
+						{error}
+					</Alert>
+				)}
 				<form
 					style={{ padding: '15px 30px' }}
 					onSubmit={handleSubmit(submit)}
@@ -123,7 +137,7 @@ const EditProfile = ({ isLoggedIn }) => {
 									backgroundColor: '#18A999',
 								}}
 							>
-								{userState.loading ? 'Loading…' : 'Submit'}
+								{loading ? 'Loading…' : 'Submit'}
 							</Button>
 						</Grid>
 					</Grid>

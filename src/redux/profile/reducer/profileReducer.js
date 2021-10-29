@@ -4,7 +4,7 @@ const initalState = {
 };
 const profileReducer = (state = initalState, action) => {
 	switch (action.type) {
-		case 'PROFILE_PENDING': {
+		case 'LOADING': {
 			return {
 				...state,
 				loading: true,
@@ -24,6 +24,21 @@ const profileReducer = (state = initalState, action) => {
 				error: action.payload,
 			};
 		}
+		case 'EDIT_PROFILE_SUCCESS': {
+			return {
+				...state,
+				loading: false,
+				message: action.payload,
+			};
+		}
+		case 'EDIT_PROFILE_FAIL': {
+			return {
+				...state,
+				loading: false,
+				error: action.payload,
+			};
+		}
+
 		default:
 			return state;
 	}

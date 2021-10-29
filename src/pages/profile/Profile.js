@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
 	Typography,
 	Box,
@@ -10,6 +10,7 @@ import {
 } from '@mui/material';
 import ProfileBanner from '../../components/banner/ProfileBanner';
 import ProfileStoriesComponent from '../../components/story/ProfileStoriesComponent';
+import DisableAccountComponent from '../../components/dialog/DisableAccountComponent';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getProfile } from '../../redux/profile/actions/profileActions';
@@ -40,15 +41,25 @@ function tabProps(index) {
 }
 
 const Profile = ({ match, isLoggedIn }) => {
-	const [value, setValue] = React.useState(0);
+	const [value, setValue] = useState(0);
+	const [open, setOpen] = useState(false);
+
+	const handleClickOpen = () => {
+		setOpen(true);
+	};
+
+	const handleClose = () => {
+		setOpen(false);
+	};
+
+	const handleChange = (event, newValue) => {
+		setValue(newValue);
+	};
 
 	const dispatch = useDispatch();
 	const { authenticated, userId } = useSelector((state) => state.authState);
 	const { profile, loading } = useSelector((state) => state.profileState);
 
-	const handleChange = (event, newValue) => {
-		setValue(newValue);
-	};
 	useEffect(() => {
 		dispatch(getProfile(match.params.id));
 	}, [match.params.id, dispatch]);
@@ -70,22 +81,41 @@ const Profile = ({ match, isLoggedIn }) => {
 				<>
 					<ProfileBanner>
 						{authenticated && match.params.id === profile._id ? (
-							<Button
-								size="small"
-								color="primary"
-								sx={{
-									textAlign: 'center',
-									backgroundColor: '#18A999',
-									px: 2,
-								}}
-							>
-								<Link
-									to={`/edit/profile/${userId}`}
-									style={{ color: 'white' }}
+							<div style={{ display: 'flex' }}>
+								<Button
+									size="small"
+									color="primary"
+									sx={{
+										textAlign: 'center',
+										backgroundColor: '#18A999',
+										px: 2,
+									}}
 								>
-									Edit Profile
-								</Link>
-							</Button>
+									<Link
+										to={`/edit/profile/${userId}`}
+										style={{ color: 'white' }}
+									>
+										Edit Profile
+									</Link>
+								</Button>
+								<Button
+									onClick={handleClickOpen}
+									size="small"
+									sx={{
+										color: 'white',
+										textAlign: 'center',
+										backgroundColor: 'red',
+										px: 2,
+										mx: 2,
+									}}
+								>
+									Disable Account
+								</Button>
+								<DisableAccountComponent
+									open={open}
+									handleClose={handleClose}
+								/>
+							</div>
 						) : null}
 					</ProfileBanner>
 					<Box sx={{ width: '100%' }}>

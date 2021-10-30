@@ -21,11 +21,12 @@ const ProfileStoriesComponent = ({ isLoggedIn, story }) => {
 				</Typography>
 				<Typography variant="body2" color="text.secondary">
 					{
-						<div
+						<p
+							style={{ marginBottom: 0 }}
 							dangerouslySetInnerHTML={{
 								__html: `${
 									story.text.length > 100
-										? `${story.text.slice(0, 30)}...`
+										? `${story.text.slice(0, 80)}...`
 										: `${story.text}`
 								}`,
 							}}

@@ -6,7 +6,7 @@ const initalState = {
 };
 const storyReducer = (state = initalState, action) => {
 	switch (action.type) {
-		case 'STORY_PENDING': {
+		case 'LOADING': {
 			return {
 				...state,
 				loading: true,

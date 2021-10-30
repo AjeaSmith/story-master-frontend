@@ -1,6 +1,6 @@
 import axios from 'axios';
 export const getStories = () => (dispatch) => {
-	dispatch({ type: 'STORY_PENDING' });
+	dispatch({ type: 'LOADING' });
 	return axios
 		.get('http://localhost:8080/api/story/')
 		.then(({ data }) => {
@@ -11,7 +11,7 @@ export const getStories = () => (dispatch) => {
 		});
 };
 export const getStoryById = (id) => (dispatch) => {
-	dispatch({ type: 'STORY_PENDING' });
+	dispatch({ type: 'LOADING' });
 	return axios
 		.get(`http://localhost:8080/api/story/${id}`)
 		.then(({ data }) => {
@@ -22,7 +22,7 @@ export const getStoryById = (id) => (dispatch) => {
 		});
 };
 export const addStory = ({ title, text }) => (dispatch) => {
-	dispatch({ type: 'STORY_PENDING' });
+	dispatch({ type: 'LOADING' });
 	return axios
 		.post(
 			`http://localhost:8080/api/story/add/`,

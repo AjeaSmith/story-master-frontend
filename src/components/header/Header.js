@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Button from '@mui/material/Button';
+import Avatar from '@mui/material/Avatar';
 import Container from '@mui/material/Container';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
-import AccountCircle from '@mui/icons-material/AccountCircle';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import axios from 'axios';
@@ -26,16 +26,15 @@ const Header = () => {
 				console.log('logout err', err);
 			});
 	};
-	const { authenticated, userId } = useSelector((state) => state.authState);
+	const { authenticated, user } = useSelector((state) => state.authState);
 
-	const [anchorEl, setAnchorEl] = React.useState(null);
+	const [anchorEl, setAnchorEl] = useState(null);
 	const handleMenu = (event) => {
 		setAnchorEl(event.currentTarget);
 	};
 	const handleClose = () => {
 		setAnchorEl(null);
 	};
-	console.log(userId);
 	return (
 		<AppBar position="static" sx={{ background: '#00004d' }}>
 			<Container>
@@ -69,7 +68,9 @@ const Header = () => {
 								onClick={handleMenu}
 								color="inherit"
 							>
-								<AccountCircle />
+								<Avatar sx={{ width: 32, height: 32 }}>
+									{user.username.charAt(0).toUpperCase()}
+								</Avatar>
 							</IconButton>
 
 							<Menu
@@ -88,7 +89,7 @@ const Header = () => {
 								onClose={handleClose}
 							>
 								<MenuItem>
-									<Link to={`/profile/${userId}`}>Profile</Link>
+									<Link to={`/profile/${user.id}`}>Profile</Link>
 								</MenuItem>
 								<MenuItem onClick={logoutFunc}>Logout</MenuItem>
 							</Menu>

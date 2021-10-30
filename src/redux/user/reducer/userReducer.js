@@ -52,6 +52,27 @@ const userReducer = (state = initalState, action) => {
 			};
 		}
 
+		case 'DELETE_PENDING': {
+			return {
+				...state,
+				loading: true,
+			};
+		}
+		case 'DELETE_SUCCESS': {
+			return {
+				...state,
+				message: action.payload,
+				loading: false,
+			};
+		}
+		case 'DELETE_FAIL': {
+			return {
+				...state,
+				loading: false,
+				error: action.payload,
+			};
+		}
+
 		default:
 			return state;
 	}

@@ -1,5 +1,11 @@
 import React, { useEffect } from 'react';
-import { Stack, Typography, Box, Container } from '@mui/material';
+import {
+	Stack,
+	Typography,
+	Box,
+	Container,
+	CircularProgress,
+} from '@mui/material';
 import ShowComments from '../../components/comments/ShowComments';
 import { useDispatch, useSelector } from 'react-redux';
 import { getStoryById } from '../../redux/story/actions/storyActions';
@@ -13,8 +19,18 @@ const ViewStory = ({ match }) => {
 	}, [match.params.id]);
 	return (
 		<>
-			{loading || story == null ? (
-				<p>Loading...</p>
+			{loading || story === null ? (
+				<Box
+					sx={{
+						display: 'flex',
+						alignItems: 'center',
+						justifyContent: 'center',
+						width: '100%',
+						height: '80vh',
+					}}
+				>
+					<CircularProgress />
+				</Box>
 			) : (
 				<>
 					<Box
@@ -58,7 +74,10 @@ const ViewStory = ({ match }) => {
 									</Typography>
 								</span>
 							</Typography>
-							<ShowComments comments={story.comments} />
+							<ShowComments
+								comments={story.comments}
+								storyId={match.params.id}
+							/>
 						</Stack>
 					</Box>
 					<Container>

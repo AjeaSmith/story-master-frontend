@@ -48,21 +48,18 @@ const Profile = ({ match, isLoggedIn }) => {
 		setOpen(true);
 	};
 
-	const handleClose = () => {
-		setOpen(false);
-	};
-
 	const handleChange = (event, newValue) => {
 		setValue(newValue);
 	};
 
 	const dispatch = useDispatch();
-	const { authenticated, userId } = useSelector((state) => state.authState);
+	const { authenticated, user } = useSelector((state) => state.authState);
 	const { profile, loading } = useSelector((state) => state.profileState);
 
 	useEffect(() => {
 		dispatch(getProfile(match.params.id));
 	}, [match.params.id, dispatch]);
+
 	return (
 		<>
 			{loading || profile === null ? (
@@ -80,7 +77,7 @@ const Profile = ({ match, isLoggedIn }) => {
 			) : (
 				<>
 					<ProfileBanner>
-						{authenticated && match.params.id === profile._id ? (
+						{authenticated && match.params.id === user.id ? (
 							<div style={{ display: 'flex' }}>
 								<Button
 									size="small"
@@ -92,7 +89,7 @@ const Profile = ({ match, isLoggedIn }) => {
 									}}
 								>
 									<Link
-										to={`/edit/profile/${userId}`}
+										to={`/edit/profile/${user.id}`}
 										style={{ color: 'white' }}
 									>
 										Edit Profile
@@ -113,7 +110,7 @@ const Profile = ({ match, isLoggedIn }) => {
 								</Button>
 								<DisableAccountComponent
 									open={open}
-									handleClose={handleClose}
+									setOpen={setOpen}
 								/>
 							</div>
 						) : null}
@@ -138,7 +135,7 @@ const Profile = ({ match, isLoggedIn }) => {
 						<TabPanel value={value} index={0}>
 							<Typography variant="body1">
 								<span className="profile__detailheader">
-									I'm from:{' '}
+									I'm from: 
 								</span>
 								{profile.location}
 							</Typography>

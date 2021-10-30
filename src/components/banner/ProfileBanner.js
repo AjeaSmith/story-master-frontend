@@ -1,5 +1,11 @@
 import React from 'react';
-import { Stack, Avatar, Typography, Box } from '@mui/material';
+import {
+	Stack,
+	Avatar,
+	Typography,
+	Box,
+	CircularProgress,
+} from '@mui/material';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
 
@@ -8,7 +14,17 @@ const ProfileBanner = ({ children }) => {
 	return (
 		<>
 			{loading || profile == null ? (
-				<p>loading...</p>
+				<Box
+					sx={{
+						display: 'flex',
+						alignItems: 'center',
+						justifyContent: 'center',
+						width: '100%',
+						height: '80vh',
+					}}
+				>
+					<CircularProgress />
+				</Box>
 			) : (
 				<Box
 					component="section"

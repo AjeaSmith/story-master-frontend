@@ -16,7 +16,7 @@ import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { addStory } from '../../redux/story/actions/storyActions';
 
-const CreateStory = ({ history }) => {
+const CreateStory = () => {
 	const { message, loading } = useSelector((state) => state.storyState);
 	const [editorState, setEditorState] = useState(EditorState.createEmpty());
 	const [editorError, setEditorError] = useState('');

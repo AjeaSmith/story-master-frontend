@@ -1,6 +1,6 @@
 const initalState = {
 	authenticated: false,
-	userId: null,
+	user: null,
 	loading: false,
 };
 const authReducer = (state = initalState, action) => {
@@ -9,7 +9,7 @@ const authReducer = (state = initalState, action) => {
 			return {
 				...state,
 				authenticated: action.payload.authenticated,
-				userId: action.payload.userId,
+				user: action.payload.user,
 			};
 		}
 		case 'LOGOUT_PENDING': {

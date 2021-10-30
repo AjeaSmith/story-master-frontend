@@ -5,14 +5,16 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
+import Box from '@mui/material/Box';
+import CircularProgress from '@mui/material/CircularProgress';
 import Banner from '../../components/banner/Banner';
 import { StyledSection, StyledContent, StyledContainer } from './HomeStyle';
 import { getStories } from '../../redux/story/actions/storyActions';
 import AllStoriesComponent from '../../components/story/AllStoriesComponent';
 
 const Home = () => {
-	const { authenticated, userId } = useSelector((state) => state.authState);
-	const { stories } = useSelector((state) => state.storyState);
+	const { authenticated } = useSelector((state) => state.authState);
+	const { stories, loading } = useSelector((state) => state.storyState);
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(getStories());
@@ -83,7 +85,19 @@ const Home = () => {
 								margin: '0 auto',
 							}}
 						>
-							{stories.length > 0 ? (
+							{loading ? (
+								<Box
+									sx={{
+										display: 'flex',
+										alignItems: 'center',
+										justifyContent: 'center',
+										width: '100%',
+										height: '80vh',
+									}}
+								>
+									<CircularProgress />
+								</Box>
+							) : (
 								<>
 									{stories.map((story) => {
 										return (
@@ -93,8 +107,9 @@ const Home = () => {
 										);
 									})}
 								</>
-							) : (
-								<p>No stories to show!</p>
+							)}
+							{stories.length <= 0 && (
+								<Typography>No stories to show!</Typography>
 							)}
 						</List>
 					</StyledContent>

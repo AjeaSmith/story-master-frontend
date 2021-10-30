@@ -10,7 +10,7 @@ export const authenticatedUser = () => (dispatch) => {
 				type: 'IS_AUTHENTICATED',
 				payload: {
 					authenticated: data.authenticated,
-					userId: data.userId,
+					user: data.user,
 				},
 			});
 		})
@@ -18,7 +18,7 @@ export const authenticatedUser = () => (dispatch) => {
 			console.log(err);
 		});
 };
-export const logout = (history) => (dispatch) => {
+export const logout = () => (dispatch) => {
 	dispatch({ type: 'LOGOUT_PENDING' });
 	return axios
 		.get('http://localhost:8080/api/user/logout')

@@ -10,10 +10,10 @@ import {
 } from '@mui/material/';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
-const AllStoriesComponent = ({ story, id }) => {
+const AllStoriesComponent = ({ story }) => {
 	return (
 		<>
-			<ListItem alignItems="flex-start" key={id}>
+			<ListItem alignItems="flex-start">
 				<ListItemAvatar>
 					<Avatar
 						sx={{ width: 40, height: 40 }}

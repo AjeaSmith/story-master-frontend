@@ -6,199 +6,68 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
+import CloseIcon from '@mui/icons-material/Close';
+import IconButton from '@mui/material/IconButton';
+import { useSelector } from 'react-redux';
+import moment from 'moment';
+import { useDispatch } from 'react-redux';
+import { deleteComment } from '../../redux/comment/actions/commentActions';
 
-const Comment = ({ comments }) => {
+const Comment = ({ comment, storyId }) => {
+	const dispatch = useDispatch()
+	const { user } = useSelector((state) => state.authState);
+	const removeComment = () => {
+		dispatch(deleteComment(comment._id, storyId))
+	};
 	return (
-		<div>
-			<List
-				sx={{
-					width: '100%',
-					maxWidth: 600,
-					bgcolor: 'background.paper',
-				}}
-			>
-				<ListItem alignItems="flex-start">
-					<ListItemAvatar>
-						<Avatar alt="Remy Sharp" src="https://picsum.photos/200" />
-					</ListItemAvatar>
+		<List
+			sx={{
+				width: '100%',
+				maxWidth: 600,
+				bgcolor: 'background.paper',
+			}}
+		>
+			<ListItem alignItems="flex-start">
+				<ListItemAvatar>
+					<Avatar
+						alt={comment.author.username}
+						src="https://picsum.photos/seed/picsum/200/300"
+					/>
+				</ListItemAvatar>
+				<ListItemText
+					primary={`${comment.author.username} (${moment(
+						comment.createdAt
+					).format('MMM DD')})`}
+					secondary={
+						<React.Fragment>
+							<Typography
+								sx={{ display: 'inline' }}
+								component="span"
+								variant="body2"
+								color="text.primary"
+							>
+								{comment.message}
+							</Typography>
+						</React.Fragment>
+					}
+				/>
+				{comment.author._id === user.id && (
 					<ListItemText
-						primary="Brunch this weekend?"
-						secondary={
-							<React.Fragment>
-								<Typography
-									sx={{ display: 'inline' }}
-									component="span"
-									variant="body2"
-									color="text.primary"
-								>
-									Lorem ipsum dolor sit amet consectetur adipisicing
-									elit. Pariatur dolores tempore aliquid perspiciatis
-									sapiente sequi aperiam ex provident neque
-									repellendus!
-								</Typography>
-							</React.Fragment>
+						sx={{ textAlign: 'right' }}
+						primary={
+							<IconButton edge="end" aria-label="delete">
+								<CloseIcon
+									fontSize="small"
+									sx={{ color: 'red' }}
+									onClick={removeComment}
+								/>
+							</IconButton>
 						}
 					/>
-				</ListItem>
-				<Divider variant="inset" component="li" />
-				<ListItem alignItems="flex-start">
-					<ListItemAvatar>
-						<Avatar alt="Remy Sharp" src="https://picsum.photos/200" />
-					</ListItemAvatar>
-					<ListItemText
-						primary="Brunch this weekend?"
-						secondary={
-							<React.Fragment>
-								<Typography
-									sx={{ display: 'inline' }}
-									component="span"
-									variant="body2"
-									color="text.primary"
-								>
-									Lorem ipsum dolor sit amet consectetur adipisicing
-									elit. Pariatur dolores tempore aliquid perspiciatis
-									sapiente sequi aperiam ex provident neque
-									repellendus!
-								</Typography>
-							</React.Fragment>
-						}
-					/>
-				</ListItem>
-				<Divider variant="inset" component="li" />
-				<ListItem alignItems="flex-start">
-					<ListItemAvatar>
-						<Avatar alt="Remy Sharp" src="https://picsum.photos/200" />
-					</ListItemAvatar>
-					<ListItemText
-						primary="Brunch this weekend?"
-						secondary={
-							<React.Fragment>
-								<Typography
-									sx={{ display: 'inline' }}
-									component="span"
-									variant="body2"
-									color="text.primary"
-								>
-									Lorem ipsum dolor sit amet consectetur adipisicing
-									elit. Pariatur dolores tempore aliquid perspiciatis
-									sapiente sequi aperiam ex provident neque
-									repellendus!
-								</Typography>
-							</React.Fragment>
-						}
-					/>
-				</ListItem>
-				<Divider variant="inset" component="li" />
-				<ListItem alignItems="flex-start">
-					<ListItemAvatar>
-						<Avatar alt="Remy Sharp" src="https://picsum.photos/200" />
-					</ListItemAvatar>
-					<ListItemText
-						primary="Brunch this weekend?"
-						secondary={
-							<React.Fragment>
-								<Typography
-									sx={{ display: 'inline' }}
-									component="span"
-									variant="body2"
-									color="text.primary"
-								>
-									Lorem ipsum dolor sit amet consectetur adipisicing
-									elit. Pariatur dolores tempore aliquid perspiciatis
-									sapiente sequi aperiam ex provident neque
-									repellendus!
-								</Typography>
-							</React.Fragment>
-						}
-					/>
-				</ListItem>
-				<Divider variant="inset" component="li" />
-				<ListItem alignItems="flex-start">
-					<ListItemAvatar>
-						<Avatar alt="Remy Sharp" src="https://picsum.photos/200" />
-					</ListItemAvatar>
-					<ListItemText
-						primary="Brunch this weekend?"
-						secondary={
-							<React.Fragment>
-								<Typography
-									sx={{ display: 'inline' }}
-									component="span"
-									variant="body2"
-									color="text.primary"
-								>
-									Lorem ipsum dolor sit, amet consectetur adipisicing
-									elit. Amet repellendus temporibus neque aperiam
-									molestias ea illum, aspernatur vel dolor praesentium
-									ex facere sunt itaque saepe expedita! Iure fugit
-									explicabo repellat, nam delectus asperiores quidem
-									nobis. Similique accusantium nulla voluptas sunt
-									temporibus corporis quidem repudiandae ipsa veritatis
-									molestiae? Magnam, enim doloremque! Debitis, magnam
-									esse, dicta ut, repellendus obcaecati numquam ipsa
-									ipsum repudiandae tempore ipsam sit alias non
-									praesentium est nesciunt ex veritatis iusto corrupti
-									ad tenetur placeat. Alias in, voluptatem impedit
-									dicta ducimus unde ipsam, expedita eligendi pariatur
-									et architecto consequatur accusantium velit
-									reprehenderit tempore ipsum vel, soluta obcaecati.
-									Quod, necessitatibus.
-								</Typography>
-							</React.Fragment>
-						}
-					/>
-				</ListItem>
-				<Divider variant="inset" component="li" />
-				<ListItem alignItems="flex-start">
-					<ListItemAvatar>
-						<Avatar alt="Remy Sharp" src="https://picsum.photos/200" />
-					</ListItemAvatar>
-					<ListItemText
-						primary="Brunch this weekend?"
-						secondary={
-							<React.Fragment>
-								<Typography
-									sx={{ display: 'inline' }}
-									component="span"
-									variant="body2"
-									color="text.primary"
-								>
-									Lorem ipsum dolor sit amet consectetur adipisicing
-									elit. Pariatur dolores tempore aliquid perspiciatis
-									sapiente sequi aperiam ex provident neque
-									repellendus!
-								</Typography>
-							</React.Fragment>
-						}
-					/>
-				</ListItem>
-				<Divider variant="inset" component="li" />
-				<ListItem alignItems="flex-start">
-					<ListItemAvatar>
-						<Avatar alt="Remy Sharp" src="https://picsum.photos/200" />
-					</ListItemAvatar>
-					<ListItemText
-						primary="Brunch this weekend?"
-						secondary={
-							<React.Fragment>
-								<Typography
-									sx={{ display: 'inline' }}
-									component="span"
-									variant="body2"
-									color="text.primary"
-								>
-									Lorem ipsum dolor sit amet consectetur adipisicing
-									elit. Pariatur dolores tempore aliquid perspiciatis
-									sapiente sequi aperiam ex provident neque
-									repellendus!
-								</Typography>
-							</React.Fragment>
-						}
-					/>
-				</ListItem>
-				{/* <Divider variant="inset" component="li" /> */}
-			</List>
-		</div>
+				)}
+			</ListItem>
+			<Divider variant="inset" component="li" />
+		</List>
 	);
 };
 

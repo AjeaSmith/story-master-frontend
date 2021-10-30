@@ -80,3 +80,28 @@ export const login = (username, password) => (dispatch) => {
 			}, 2000);
 		});
 };
+export const disableAccount = (userId) => (dispatch) => {
+	dispatch({
+		type: 'DELETE_PENDING',
+	});
+	return axios
+		.delete(`http://localhost:8080/api/user/${userId}`, {
+			withCredentials: true,
+		})
+		.then(({ data }) => {
+			console.log(data);
+			dispatch({
+				type: 'DELETE_SUCCESS',
+				payload: data.message,
+			});
+			setTimeout(() => {
+				window.location = '/';
+			}, 2000);
+		})
+		.catch((err) => {
+			dispatch({
+				type: 'DELETE_FAIL',
+				payload: err.response.data.message,
+			});
+		});
+};

@@ -28,3 +28,10 @@ hr {
 span.css-10hburv-MuiTypography-root {
 	font-size: 13px;
 }
+
+div.css-1t1j96h-MuiPaper-root-MuiDialog-paper {
+	max-width: 600px;
+	margin: 0 auto;
+	width: 100%;
+	height: 698px;
+}

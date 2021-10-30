@@ -12,6 +12,7 @@ import ViewStory from './pages/story/ViewStory';
 import { createBrowserHistory } from 'history';
 import { useDispatch } from 'react-redux';
 import { authenticatedUser } from './redux/auth/authActions';
+import PrivateRoute from './components/PrivateRoute';
 
 const customHistory = createBrowserHistory();
 
@@ -35,7 +36,9 @@ function App() {
 					<Route path="/register" component={Register} />
 					<Route path="/login" component={Login} />
 					<Route path="/profile/:id" component={Profile} />
-					<Route path="/edit/profile/:id" component={EditProfile} />
+					<PrivateRoute path="/edit/profile/:id">
+						<EditProfile />
+					</PrivateRoute>
 					<Route path="/story/create" component={CreateStory} />
 					<Route path="/view/story/:id" component={ViewStory} />
 				</Switch>

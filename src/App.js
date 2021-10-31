@@ -36,12 +36,12 @@ function App() {
 					<Route path="/register" component={Register} />
 					<Route path="/login" component={Login} />
 					<Route path="/profile/:id" component={Profile} />
-					<PrivateRoute path="/edit/profile/:id">
+					{/* <PrivateRoute path="/edit/profile/:id">
 						<EditProfile />
 					</PrivateRoute>
 					<PrivateRoute path="/story/create">
 						<CreateStory />
-					</PrivateRoute>
+					</PrivateRoute> */}
 					<Route path="/view/story/:id" component={ViewStory} />
 				</Switch>
 			</Router>

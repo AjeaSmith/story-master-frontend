@@ -3,7 +3,7 @@ import axios from 'axios';
 export const getStories = () => (dispatch) => {
 	dispatch({ type: 'ALL_STORIES_LOADING' });
 	return axios
-		.get('http://localhost:8080/api/story/')
+		.get('https://story-master-backend.herokuapp.com/api/story/')
 		.then(({ data }) => {
 			dispatch({ type: 'ALL_STORIES_SUCCESS', payload: data.stories });
 		})
@@ -14,7 +14,7 @@ export const getStories = () => (dispatch) => {
 export const getStoryById = (id) => (dispatch) => {
 	dispatch({ type: 'GET_STORY_LOADING' });
 	return axios
-		.get(`http://localhost:8080/api/story/${id}`)
+		.get(`https://story-master-backend.herokuapp.com/api/story/${id}`)
 		.then(({ data }) => {
 			dispatch({ type: 'GET_STORY_SUCCESS', payload: data.story });
 		})
@@ -26,7 +26,7 @@ export const addStory = ({ title, text }) => (dispatch) => {
 	dispatch({ type: 'CREATE_STORY_LOADING' });
 	return axios
 		.post(
-			`http://localhost:8080/api/story/add/`,
+			`https://story-master-backend.herokuapp.com/api/story/add/`,
 			{
 				title,
 				text,
@@ -53,9 +53,12 @@ export const addStory = ({ title, text }) => (dispatch) => {
 export const deleteStory = (storyId) => (dispatch) => {
 	// dispatch({ type: 'LOADING' });
 	return axios
-		.delete(`http://localhost:8080/api/story/mine/${storyId}`, {
-			withCredentials: true,
-		})
+		.delete(
+			`https://story-master-backend.herokuapp.com/api/story/mine/${storyId}`,
+			{
+				withCredentials: true,
+			}
+		)
 		.then(({ data }) => {
 			dispatch({ type: 'DELETE_STORY_SUCCESS', payload: data.message });
 

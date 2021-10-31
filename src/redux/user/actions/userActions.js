@@ -7,7 +7,7 @@ export const register = (email, username, password, history) => async (
 
 	return axios
 		.post(
-			'http://localhost:8080/api/user/register',
+			'https://story-master-backend.herokuapp.com/api/user/register',
 			{
 				email,
 				username,
@@ -48,7 +48,7 @@ export const login = (username, password) => (dispatch) => {
 	});
 	return axios
 		.post(
-			'http://localhost:8080/api/user/login',
+			'https://story-master-backend.herokuapp.com/api/user/login',
 			{
 				username: username,
 				password: password,
@@ -85,7 +85,7 @@ export const disableAccount = (userId) => (dispatch) => {
 		type: 'DELETE_PENDING',
 	});
 	return axios
-		.delete(`http://localhost:8080/api/user/${userId}`, {
+		.delete(`https://story-master-backend.herokuapp.com/api/user/${userId}`, {
 			withCredentials: true,
 		})
 		.then(({ data }) => {

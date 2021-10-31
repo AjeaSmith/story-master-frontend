@@ -16,7 +16,7 @@ import { useSelector } from 'react-redux';
 const Header = () => {
 	const logoutFunc = () => {
 		return axios
-			.get('http://localhost:8080/api/user/logout', {
+			.get('https://story-master-backend.herokuapp.com/api/user/logout', {
 				withCredentials: true,
 			})
 			.then(() => {

@@ -1,9 +1,12 @@
 import axios from 'axios';
 export const authenticatedUser = () => (dispatch) => {
 	axios
-		.get('http://localhost:8080/api/user/authenticated', {
-			withCredentials: true,
-		})
+		.get(
+			'https://story-master-backend.herokuapp.com/api/user/authenticated',
+			{
+				withCredentials: true,
+			}
+		)
 		.then(({ data }) => {
 			console.log(data);
 			dispatch({
@@ -21,7 +24,7 @@ export const authenticatedUser = () => (dispatch) => {
 export const logout = () => (dispatch) => {
 	dispatch({ type: 'LOGOUT_PENDING' });
 	return axios
-		.get('http://localhost:8080/api/user/logout')
+		.get('https://story-master-backend.herokuapp.com/api/user/logout')
 		.then(({ data }) => {
 			dispatch({ type: 'LOGOUT', payload: data.authenticated });
 			window.location = '/login';

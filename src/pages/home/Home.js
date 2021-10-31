@@ -19,7 +19,6 @@ const Home = () => {
 	useEffect(() => {
 		dispatch(getStories());
 	}, [dispatch]);
-	console.log(states);
 	return (
 		<>
 			<Banner>

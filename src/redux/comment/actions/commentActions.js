@@ -5,7 +5,7 @@ export const addComment = (storyId, message) => async (dispatch) => {
 
 	return axios
 		.post(
-			`http://localhost:8080/api/comment/${storyId}/add`,
+			`https://story-master-backend.herokuapp.com/api/comment/${storyId}/add`,
 			{
 				message: message,
 			},
@@ -32,9 +32,12 @@ export const deleteComment = (commentId, storyId) => async (dispatch) => {
 	dispatch({ type: 'LOADING' });
 
 	return axios
-		.delete(`http://localhost:8080/api/comment/${storyId}/${commentId}`, {
-			withCredentials: true,
-		})
+		.delete(
+			`https://story-master-backend.herokuapp.com/api/comment/${storyId}/${commentId}`,
+			{
+				withCredentials: true,
+			}
+		)
 		.then(({ data }) => {
 			dispatch({
 				type: 'COMMENT_DELETE_SUCCESS',

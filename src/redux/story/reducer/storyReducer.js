@@ -1,32 +1,25 @@
 const initalState = {
+	loading: false,
 	stories: [],
 	story: null,
-	loading: false,
 	error: null,
 };
 const storyReducer = (state = initalState, action) => {
 	switch (action.type) {
-		case 'LOADING': {
+		case 'ALL_STORIES_LOADING': {
 			return {
 				...state,
 				loading: true,
 			};
 		}
-		case 'STORY_SUCCESS': {
+		case 'ALL_STORIES_SUCCESS': {
 			return {
 				...state,
 				loading: false,
 				stories: action.payload,
 			};
 		}
-		case 'ONE_STORY_SUCCESS': {
-			return {
-				...state,
-				loading: false,
-				story: action.payload,
-			};
-		}
-		case 'STORY_FAIL': {
+		case 'ALL_STORIES_FAIL': {
 			return {
 				...state,
 				loading: false,
@@ -34,6 +27,26 @@ const storyReducer = (state = initalState, action) => {
 			};
 		}
 
+		case 'GET_STORY_LOADING': {
+			return {
+				...state,
+				loading: false,
+			};
+		}
+		case 'GET_STORY_SUCCESS': {
+			return {
+				...state,
+				loading: false,
+				story: action.payload,
+			};
+		}
+
+		case 'CREATE_STORY_LOADING': {
+			return {
+				...state,
+				loading: true,
+			};
+		}
 		case 'CREATE_STORY_SUCCESS': {
 			return {
 				...state,
@@ -46,6 +59,14 @@ const storyReducer = (state = initalState, action) => {
 				...state,
 				loading: false,
 				error: action.payload,
+			};
+		}
+
+		case 'DELETE_STORY_SUCCESS': {
+			return {
+				...state,
+				loading: false,
+				message: action.payload,
 			};
 		}
 		default:

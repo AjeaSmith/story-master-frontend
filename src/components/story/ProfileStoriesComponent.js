@@ -5,14 +5,24 @@ import {
 	CardContent,
 	Button,
 	Typography,
-	Grid,
+	Alert,
 } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { deleteStory } from '../../redux/story/actions/storyActions';
 
-const ProfileStoriesComponent = ({ isLoggedIn, story }) => {
+const ProfileStoriesComponent = ({ story }) => {
+	const dispatch = useDispatch();
+
+	const { authenticated, user } = useSelector((state) => state.authState);
+	const { loading } = useSelector((state) => state.storyState);
+	const deleteAStory = () => {
+		dispatch(deleteStory(story._id));
+	};
 	return (
-		<Card sx={{ maxWidth: 345, background: '#F3F4F6' }}>
+		<Card sx={{ maxWidth: 345, background: '#F3F4F6' }} key={story._id}>
 			<CardContent>
+				
 				<Typography gutterBottom variant="h5" component="div">
 					{story.title}{' '}
 					<small style={{ fontSize: '13px', fontStyle: 'italic' }}>
@@ -43,7 +53,15 @@ const ProfileStoriesComponent = ({ isLoggedIn, story }) => {
 						View
 					</Link>
 				</Button>
-				{isLoggedIn ? <Button size="small">Delete Story</Button> : null}
+				{authenticated && story.author._id === user.id ? (
+					<Button
+						size="small"
+						sx={{ color: '#a50000' }}
+						onClick={deleteAStory}
+					>
+						{loading ? 'Loading...' : 'Delete Story'}
+					</Button>
+				) : null}
 			</CardActions>
 		</Card>
 	);

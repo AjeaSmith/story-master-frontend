@@ -1,6 +1,6 @@
 import axios from 'axios';
 export const getProfile = (id) => (dispatch) => {
-	dispatch({ type: 'LOADING' });
+	dispatch({ type: 'PROFILE_LOADING' });
 	return axios
 		.get(`http://localhost:8080/api/user/${id}`)
 		.then(({ data }) => {
@@ -12,7 +12,7 @@ export const getProfile = (id) => (dispatch) => {
 		});
 };
 export const editProfile = (id, data) => (dispatch) => {
-	dispatch({ type: 'LOADING' });
+	dispatch({ type: 'EDIT_PROFILE_LOADING' });
 	console.log(data);
 	return axios
 		.put(`http://localhost:8080/api/user/${id}/edit`, data, {

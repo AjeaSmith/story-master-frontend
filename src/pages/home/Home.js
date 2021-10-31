@@ -14,11 +14,12 @@ import AllStoriesComponent from '../../components/story/AllStoriesComponent';
 
 const Home = () => {
 	const { authenticated } = useSelector((state) => state.authState);
-	const { stories, loading } = useSelector((state) => state.storyState);
+	const states = useSelector((state) => state.storyState);
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(getStories());
 	}, [dispatch]);
+	console.log(states);
 	return (
 		<>
 			<Banner>
@@ -85,7 +86,7 @@ const Home = () => {
 								margin: '0 auto',
 							}}
 						>
-							{loading ? (
+							{states.loading ? (
 								<Box
 									sx={{
 										display: 'flex',
@@ -99,7 +100,7 @@ const Home = () => {
 								</Box>
 							) : (
 								<>
-									{stories.map((story) => {
+									{states.stories.map((story) => {
 										return (
 											<div key={story._id}>
 												<AllStoriesComponent story={story} />
@@ -107,9 +108,6 @@ const Home = () => {
 										);
 									})}
 								</>
-							)}
-							{stories.length <= 0 && (
-								<Typography>No stories to show!</Typography>
 							)}
 						</List>
 					</StyledContent>

@@ -7,6 +7,7 @@ import {
 	CircularProgress,
 	Tabs,
 	Tab,
+	Alert,
 } from '@mui/material';
 import ProfileBanner from '../../components/banner/ProfileBanner';
 import ProfileStoriesComponent from '../../components/story/ProfileStoriesComponent';
@@ -55,6 +56,7 @@ const Profile = ({ match, isLoggedIn }) => {
 	const dispatch = useDispatch();
 	const { authenticated, user } = useSelector((state) => state.authState);
 	const { profile, loading } = useSelector((state) => state.profileState);
+	const { message } = useSelector((state) => state.storyState);
 
 	useEffect(() => {
 		dispatch(getProfile(match.params.id));
@@ -134,9 +136,7 @@ const Profile = ({ match, isLoggedIn }) => {
 						</Box>
 						<TabPanel value={value} index={0}>
 							<Typography variant="body1">
-								<span className="profile__detailheader">
-									I'm from: 
-								</span>
+								<span className="profile__detailheader">I'm from:</span>
 								{profile.location}
 							</Typography>
 							<Typography
@@ -148,6 +148,7 @@ const Profile = ({ match, isLoggedIn }) => {
 							</Typography>
 						</TabPanel>
 						<TabPanel value={value} index={1}>
+							{message && <Alert sx={{ mb: 3 }}>{message}</Alert>}
 							<Grid container spacing={2}>
 								{profile.publishedStories.map((story) => {
 									return (

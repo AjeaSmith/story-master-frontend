@@ -44,7 +44,6 @@ const CreateStory = () => {
 		formState: { errors },
 	} = useForm({ mode: 'onBlur' });
 
-	console.log(editorState.getCurrentContent().hasText());
 	return (
 		<Container>
 			<Typography variant="h4" align="center" sx={{ py: 3 }}>

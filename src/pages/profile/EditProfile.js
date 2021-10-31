@@ -13,8 +13,8 @@ import {
 } from '@mui/material';
 import { editProfile } from '../../redux/profile/actions/profileActions';
 
-const EditProfile = ({ match }) => {
-	// const { loading } = useSelector((state) => state.userState);
+const EditProfile = () => {
+	const { user } = useSelector((state) => state.authState);
 	const { message, error, loading } = useSelector(
 		(state) => state.profileState
 	);
@@ -26,7 +26,7 @@ const EditProfile = ({ match }) => {
 	} = useForm({ mode: 'onBlur' });
 
 	const submit = (data) => {
-		dispatch(editProfile(match.params.id, data));
+		dispatch(editProfile(user.id, data));
 	};
 	return (
 		<section>

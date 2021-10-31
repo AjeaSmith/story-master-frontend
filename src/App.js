@@ -39,7 +39,9 @@ function App() {
 					<PrivateRoute path="/edit/profile/:id">
 						<EditProfile />
 					</PrivateRoute>
-					<Route path="/story/create" component={CreateStory} />
+					<PrivateRoute path="/story/create">
+						<CreateStory />
+					</PrivateRoute>
 					<Route path="/view/story/:id" component={ViewStory} />
 				</Switch>
 			</Router>

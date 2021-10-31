@@ -2,7 +2,7 @@ import axios from 'axios';
 export const authenticatedUser = () => (dispatch) => {
 	axios
 		.get(
-			'https://story-master-backend.herokuapp.com/api/user/authenticated',
+			'http://localhost:8080/api/user/authenticated',
 			{
 				withCredentials: true,
 			}

@@ -5,7 +5,6 @@ import {
 	CardContent,
 	Button,
 	Typography,
-	Alert,
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
@@ -22,27 +21,32 @@ const ProfileStoriesComponent = ({ story }) => {
 	return (
 		<Card sx={{ maxWidth: 345, background: '#F3F4F6' }} key={story._id}>
 			<CardContent>
-				
 				<Typography gutterBottom variant="h5" component="div">
 					{story.title}{' '}
 					<small style={{ fontSize: '13px', fontStyle: 'italic' }}>
 						by: {story.author.username}
 					</small>
 				</Typography>
-				<Typography variant="body2" color="text.secondary">
-					{
-						<p
-							style={{ marginBottom: 0 }}
-							dangerouslySetInnerHTML={{
-								__html: `${
-									story.text.length > 100
-										? `${story.text.slice(0, 80)}...`
-										: `${story.text}`
-								}`,
-							}}
-						/>
-					}
-				</Typography>
+
+				{
+					<p
+						style={{
+							marginBottom: 0,
+							fontWeight: 400,
+							fontSize: '0.875rem',
+							lineHeight: '1.43',
+							letterSpacing: '0.01071em',
+							color: 'rgba(0, 0, 0, 0.6)',
+						}}
+						dangerouslySetInnerHTML={{
+							__html: `${
+								story.text.length > 100
+									? `${story.text.slice(0, 80)}...`
+									: `${story.text}`
+							}`,
+						}}
+					/>
+				}
 			</CardContent>
 			<CardActions>
 				<Button size="small">

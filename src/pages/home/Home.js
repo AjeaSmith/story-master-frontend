@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
@@ -14,7 +13,7 @@ import AllStoriesComponent from '../../components/story/AllStoriesComponent';
 
 const Home = () => {
 	const { authenticated } = useSelector((state) => state.authState);
-	const states = useSelector((state) => state.storyState);
+	const { loading, stories } = useSelector((state) => state.storyState);
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(getStories());
@@ -34,22 +33,21 @@ const Home = () => {
 						color: '#00004d',
 					}}
 				>
-					<Typography
-						align="center"
-						variant="h3"
-						sx={{ fontWeight: '600' }}
-					>
+					<h1 style={{ fontWeight: '600', textAlign: 'center' }}>
 						Share your story around the world!
-					</Typography>
-					<Typography
-						align="center"
+					</h1>
+					<h5
 						variant="subtitle1"
-						sx={{ fontWeight: '500', margin: '12px 0' }}
+						style={{
+							fontWeight: '500',
+							margin: '12px 0',
+							textAlign: 'center',
+						}}
 					>
 						Lorem ipsum dolor sit amet consectetur adipisicing elit.
 						Expedita saepe eos error harum quos praesentium odio
 						voluptatum quas reprehenderit. Explicabo!
-					</Typography>
+					</h5>
 					{authenticated ? (
 						<Button
 							variant="contained"
@@ -85,7 +83,7 @@ const Home = () => {
 								margin: '0 auto',
 							}}
 						>
-							{states.loading ? (
+							{loading ? (
 								<Box
 									sx={{
 										display: 'flex',
@@ -99,7 +97,7 @@ const Home = () => {
 								</Box>
 							) : (
 								<>
-									{states.stories.map((story) => {
+									{stories.map((story) => {
 										return (
 											<div key={story._id}>
 												<AllStoriesComponent story={story} />

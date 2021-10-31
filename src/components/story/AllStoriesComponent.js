@@ -27,25 +27,26 @@ const AllStoriesComponent = ({ story }) => {
 					).format('MMM DD')}`}
 					secondary={
 						<React.Fragment>
-							<h3>{story.title}</h3>
 							<Typography
 								sx={{ display: 'inline' }}
-								component="div"
-								variant="body2"
+								component="span"
+								variant="h5"
 								color="text.primary"
 							>
-								{
-									<div
-										dangerouslySetInnerHTML={{
-											__html: `${
-												story.text.length > 100
-													? `${story.text.slice(0, 100)}...`
-													: `${story.text}`
-											}`,
-										}}
-									/>
-								}
+								{story.title}
 							</Typography>
+							<br />
+							{
+								<span
+									dangerouslySetInnerHTML={{
+										__html: `${
+											story.text.length > 100
+												? `${story.text.slice(0, 100)}...`
+												: `${story.text}`
+										}`,
+									}}
+								/>
+							}
 						</React.Fragment>
 					}
 				/>

@@ -16,7 +16,7 @@ const ViewStory = ({ match }) => {
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(getStoryById(match.params.id));
-	}, [match.params.id]);
+	}, [match.params.id, dispatch]);
 	return (
 		<>
 			{loading || story === null ? (

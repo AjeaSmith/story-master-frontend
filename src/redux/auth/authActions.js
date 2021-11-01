@@ -2,13 +2,12 @@ import axios from 'axios';
 export const authenticatedUser = () => (dispatch) => {
 	axios
 		.get(
-			'http://localhost:8080/api/user/authenticated',
+			'https://story-master-backend.herokuapp.com/api/user/authenticated',
 			{
 				withCredentials: true,
 			}
 		)
 		.then(({ data }) => {
-			console.log(data);
 			dispatch({
 				type: 'IS_AUTHENTICATED',
 				payload: {
